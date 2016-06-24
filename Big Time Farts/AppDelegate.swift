@@ -15,7 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.makeKeyAndVisible()
+        let rootViewController = FartButtonViewController()
+        window?.rootViewController = rootViewController
+        
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+
         return true
     }
 

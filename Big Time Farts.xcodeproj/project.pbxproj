@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B2356E01D1C8A1B004714A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */; };
-		7B2356E21D1C8A1B004714A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2356E11D1C8A1B004714A1 /* ViewController.swift */; };
+		7B2356E21D1C8A1B004714A1 /* FartButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */; };
 		7B2356E71D1C8A1B004714A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E61D1C8A1B004714A1 /* Assets.xcassets */; };
 		7B2356EA1D1C8A1B004714A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		7B2356DC1D1C8A1B004714A1 /* Big Time Farts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Big Time Farts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7B2356E11D1C8A1B004714A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartButtonViewController.swift; sourceTree = "<group>"; };
 		7B2356E61D1C8A1B004714A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B2356E91D1C8A1B004714A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B2356EB1D1C8A1B004714A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */,
-				7B2356E11D1C8A1B004714A1 /* ViewController.swift */,
+				7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */,
 				7B2356E61D1C8A1B004714A1 /* Assets.xcassets */,
 				7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */,
 				7B2356EB1D1C8A1B004714A1 /* Info.plist */,
@@ -131,7 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B2356E21D1C8A1B004714A1 /* ViewController.swift in Sources */,
+				7B2356E21D1C8A1B004714A1 /* FartButtonViewController.swift in Sources */,
 				7B2356E01D1C8A1B004714A1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
