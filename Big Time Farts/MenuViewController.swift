@@ -12,11 +12,20 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.purpleColor()
         
         setupViews()
         
     }
+    
+    let exitButton: UIButton = {
+    
+        let button = UIButton()
+        return button
+    }()
+    
     
     let fartTable: UITableView = {
         
@@ -26,20 +35,30 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }()
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return .count
+        return fartList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = fartTable.dequeueReusableCellWithIdentifier("fartCell") as! FartTableViewCell
         
-        cell.textLabel?.text = fartData[indexPath.row]
+        if indexPath.section == 0 {
         
-        return cell
+            let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "BigTomFartsCell")
+            return cell
+        }
+            
+        else {
+        
+            let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "fartCell")
+            cell.textLabel?.text = fartList[indexPath.row].name
+            return cell
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return menuSection.count
+        return 2
     }
+    
+    
     
     func setupViews() {
         
@@ -49,6 +68,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         fartTable.delegate = self
         fartTable.dataSource = self
         fartTable.registerClass(FartTableViewCell.self, forCellReuseIdentifier: "fartCell")
+        fartTable.registerClass(BigTomFartsTableViewCell.self, forCellReuseIdentifier: "BigTomFartsCell")
     
         let viewsDictionary = ["v0": fartTable]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))

@@ -8,10 +8,12 @@
 
 import Foundation
 
-class fartData {
+struct FartData {
     
-    let menuSection = ["pizza", "deep dish pizza", "calzone", "deep dish pizza", "calzone"]
-    
-    let fartData = [["one", "two", "three"],["four", "five", "six", ],["seven"],["eight"],["nine"]]
-    
+    var sectionName: String
+    var name: String
+    let fartSound: NSURL
 }
+
+
+var fartList = [FartData(sectionName: "fartSelect", name: "first-fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!))]
