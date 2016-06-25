@@ -16,4 +16,4 @@ struct FartData {
 }
 
 
-var fartList = [FartData(sectionName: "fartSelect", name: "first-fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!))]
+var fartList = [FartData(sectionName: "fartSelect", name: "first-fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!)), FartData(sectionName: "fartSelect", name: "first-fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!))]

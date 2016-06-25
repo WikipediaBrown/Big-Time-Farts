@@ -11,6 +11,8 @@ import UIKit
 var noteCount = UILabel()
 
 class MenuHeaderSection: UITableViewHeaderFooterView {
+    
+    
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -23,7 +25,6 @@ class MenuHeaderSection: UITableViewHeaderFooterView {
     
     
     let collectionHeader: UILabel = {
-        let label = UILabel()
         noteCount.text = "You've got  notes saved"
         noteCount.font = UIFont.boldSystemFontOfSize(14)
         noteCount.textColor = UIColor.yellowColor()

@@ -9,12 +9,14 @@
 import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.purpleColor()
         
         setupViews()
+        fartTable.sectionHeaderHeight = 50
+        fartTable.separatorStyle = .None
         
     }
     
@@ -25,18 +27,25 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         return table
     }()
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fartList.count
+        
+        if section == 0 {
+            
+            return 1
+        } else {
+            
+            return fartList.count
+        }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-        
+            
             let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "BigTomFartsCell")
             return cell
         }
             
         else {
-        
+            
             let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "FartCell")
             cell.textLabel?.text = fartList[indexPath.row].name
             return cell
@@ -47,8 +56,17 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerCell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader")
-        return headerCell
+        if section == 0 {
+            
+            return nil
+            
+            
+        } else {
+            
+            let headerCell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader")
+            return headerCell
+            
+        }
     }
     
     func setupViews() {
@@ -61,10 +79,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         fartTable.registerClass(FartTableViewCell.self, forCellReuseIdentifier: "FartCell")
         fartTable.registerClass(BigTomFartsTableViewCell.self, forCellReuseIdentifier: "BigTomFartsCell")
         fartTable.registerClass(MenuHeaderSection.self, forHeaderFooterViewReuseIdentifier: "MenuHeader")
-    
+        
         let viewsDictionary = ["v0": fartTable]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
-
+    
 }
