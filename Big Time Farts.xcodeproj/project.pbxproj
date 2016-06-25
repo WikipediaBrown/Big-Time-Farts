@@ -13,6 +13,8 @@
 		7B2356EA1D1C8A1B004714A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */; };
 		7B2356F21D1CC85E004714A1 /* test-fart.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356F11D1CC85E004714A1 /* test-fart.mp3 */; };
 		7BEEB6411D1E2D3E00B96281 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */; };
+		7BEEB6431D1E875B00B96281 /* FartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6421D1E875B00B96281 /* FartData.swift */; };
+		7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		7B2356EB1D1C8A1B004714A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B2356F11D1CC85E004714A1 /* test-fart.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "test-fart.mp3"; sourceTree = "<group>"; };
 		7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		7BEEB6421D1E875B00B96281 /* FartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartData.swift; sourceTree = "<group>"; };
+		7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +60,11 @@
 		7B2356DE1D1C8A1B004714A1 /* Big Time Farts */ = {
 			isa = PBXGroup;
 			children = (
+				7BEEB6421D1E875B00B96281 /* FartData.swift */,
 				7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */,
 				7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */,
 				7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */,
+				7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */,
 				7B2356E61D1C8A1B004714A1 /* Assets.xcassets */,
 				7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */,
 				7B2356EB1D1C8A1B004714A1 /* Info.plist */,
@@ -139,6 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */,
+				7BEEB6431D1E875B00B96281 /* FartData.swift in Sources */,
 				7B2356E21D1C8A1B004714A1 /* FartButtonViewController.swift in Sources */,
 				7BEEB6411D1E2D3E00B96281 /* MenuViewController.swift in Sources */,
 				7B2356E01D1C8A1B004714A1 /* AppDelegate.swift in Sources */,
