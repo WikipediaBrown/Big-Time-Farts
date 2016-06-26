@@ -8,8 +8,6 @@
 
 import UIKit
 
-var noteCount = UILabel()
-
 class MenuHeaderSection: UITableViewHeaderFooterView {
     
     
@@ -25,9 +23,10 @@ class MenuHeaderSection: UITableViewHeaderFooterView {
     
     
     let collectionHeader: UILabel = {
-        noteCount.text = "You've got  notes saved"
+        var noteCount = UILabel()
+        noteCount.text = "There are 2 farts"
         noteCount.font = UIFont.boldSystemFontOfSize(14)
-        noteCount.textColor = UIColor.yellowColor()
+        noteCount.textColor = UIColor.blueColor()
         noteCount.translatesAutoresizingMaskIntoConstraints = false
         return noteCount
         
@@ -37,7 +36,6 @@ class MenuHeaderSection: UITableViewHeaderFooterView {
     func setupViews() {
         
         addSubview(collectionHeader)
-        contentView.backgroundColor = UIColor.greenColor()
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-16-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": collectionHeader]))
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": collectionHeader]))
     }

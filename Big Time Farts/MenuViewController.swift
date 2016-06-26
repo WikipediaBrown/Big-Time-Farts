@@ -15,9 +15,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.backgroundColor = UIColor.purpleColor()
         
         setupViews()
-        fartTable.sectionHeaderHeight = 50
-        fartTable.separatorStyle = .None
-        
     }
     
     let fartTable: UITableView = {
@@ -42,9 +39,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "BigTomFartsCell")
             return cell
-        }
-            
-        else {
+        } else {
             
             let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "FartCell")
             cell.textLabel?.text = fartList[indexPath.row].name
@@ -69,10 +64,30 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        fartSound = fartList[indexPath.row].fartSound
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+        
+            return 0
+        } else {
+        
+            return 50
+        }
+    }
+    
     func setupViews() {
         
         let navBar: UINavigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 64))
         self.view.addSubview(navBar)
+        let navBarItem = UINavigationItem()
+        navBar.items = [navBarItem]
+        
+        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.dismissMenu))
+        
         self.view.addSubview(fartTable)
         fartTable.delegate = self
         fartTable.dataSource = self
@@ -80,9 +95,18 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         fartTable.registerClass(BigTomFartsTableViewCell.self, forCellReuseIdentifier: "BigTomFartsCell")
         fartTable.registerClass(MenuHeaderSection.self, forHeaderFooterViewReuseIdentifier: "MenuHeader")
         
+        fartTable.separatorStyle = .None
+        
         let viewsDictionary = ["v0": fartTable]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+    }
+    
+    func dismissMenu() {
+        self.dismissViewControllerAnimated(true) {
+            
+        }
+    
     }
     
 }

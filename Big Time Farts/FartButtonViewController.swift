@@ -40,7 +40,7 @@ class FartButtonViewController: UIViewController {
     
     }()
     
-    let fartSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!)
+    //let fartSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!)
     
     func setupButton() {
     

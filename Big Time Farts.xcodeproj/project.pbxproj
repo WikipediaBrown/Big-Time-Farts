@@ -17,6 +17,7 @@
 		7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */; };
 		7BEEB6471D1EAFD000B96281 /* BigTomFartsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6461D1EAFD000B96281 /* BigTomFartsTableViewCell.swift */; };
 		7BEEB6491D1EB1E100B96281 /* MenuHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6481D1EB1E100B96281 /* MenuHeaderSection.swift */; };
+		7BEEB64D1D1F6BF000B96281 /* test-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartTableViewCell.swift; sourceTree = "<group>"; };
 		7BEEB6461D1EAFD000B96281 /* BigTomFartsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigTomFartsTableViewCell.swift; sourceTree = "<group>"; };
 		7BEEB6481D1EB1E100B96281 /* MenuHeaderSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHeaderSection.swift; sourceTree = "<group>"; };
+		7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "test-2.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				7B2356E61D1C8A1B004714A1 /* Assets.xcassets */,
 				7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */,
 				7B2356EB1D1C8A1B004714A1 /* Info.plist */,
+				7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */,
 				7B2356F11D1CC85E004714A1 /* test-fart.mp3 */,
 			);
 			path = "Big Time Farts";
@@ -141,6 +144,7 @@
 				7B2356EA1D1C8A1B004714A1 /* LaunchScreen.storyboard in Resources */,
 				7B2356E71D1C8A1B004714A1 /* Assets.xcassets in Resources */,
 				7B2356F21D1CC85E004714A1 /* test-fart.mp3 in Resources */,
+				7BEEB64D1D1F6BF000B96281 /* test-2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
