@@ -12,7 +12,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.purpleColor()
+        
+        view.backgroundColor = UIColor.purpleColor()
+        
+        fartTable.estimatedRowHeight = 50
+        fartTable.rowHeight = UITableViewAutomaticDimension
+        
+        fartTable.setNeedsLayout()
+        fartTable.layoutIfNeeded()
         
         setupViews()
     }
@@ -37,13 +44,15 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.section == 0 {
             
-            let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "BigTomFartsCell")
-            return cell
+            let topCell = tableView.dequeueReusableCellWithIdentifier("BigTomFartsCell", forIndexPath: indexPath) as! BigTomFartsTableViewCell
+            
+            return topCell
         } else {
             
-            let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "FartCell")
-            cell.textLabel?.text = fartList[indexPath.row].name
-            return cell
+            let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
+            
+            fartCell.textLabel?.text = fartList[indexPath.row].name
+            return fartCell
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
