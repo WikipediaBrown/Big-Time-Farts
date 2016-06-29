@@ -18,8 +18,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         //fartTable.estimatedRowHeight = 50
         //fartTable.rowHeight = UITableViewAutomaticDimension
         
-        //fartTable.setNeedsLayout()
-        //fartTable.layoutIfNeeded()
+        fartTable.setNeedsLayout()
+        fartTable.layoutIfNeeded()
         
         setupViews()
     }
@@ -65,7 +65,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.section == 0 {
             
             let topCell = tableView.dequeueReusableCellWithIdentifier("BigTomFartsCell", forIndexPath: indexPath) as! BigTomFartsTableViewCell
-            
+            topCell.selectionStyle = UITableViewCellSelectionStyle.None
             return topCell
         } else {
             

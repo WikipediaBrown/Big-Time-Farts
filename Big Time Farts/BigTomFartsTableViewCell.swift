@@ -13,11 +13,17 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     
     var stackView: UIStackView!
     
+    var playSaveStackview: UIStackView!
+    
+    var fartRecordingSession: AVAudioSession!
+    
     var fartRecorder: AVAudioRecorder!
     
     var playRecordedFartButton: UIButton!
     
-    var whistlePlayer: AVAudioPlayer!
+    var saveRecordedFartButton: UIButton!
+    
+    var fartPlayer: AVAudioPlayer!
     
     let bigTimeFartsLogo: UIImageView = {
         
@@ -33,12 +39,6 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         button.backgroundColor = UIColor.blueColor()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-    }()
-    
-    var fartRecordingSession: AVAudioSession = {
-        
-        let session = AVAudioSession()
-        return session
     }()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -70,7 +70,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
             
             self.deactivateRecordButton()
         }
-        
+        addSubview(bigTimeFartsLogo)
         stackView = UIStackView()
         stackView.spacing = 30
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,9 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView]))
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[bigTimeFartsLogo]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["bigTimeFartsLogo": bigTimeFartsLogo]))
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[bigTimeFartsLogo]-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView, "bigTimeFartsLogo": bigTimeFartsLogo]))
 
     }
     
@@ -92,16 +94,17 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
-    
     func setupViews() {
         
-        stackView.addArrangedSubview(bigTimeFartsLogo)
+        //stackView.addArrangedSubview(bigTimeFartsLogo)
+        
+        playSaveStackview = UIStackView()
+        playSaveStackview.spacing = 30
+        playSaveStackview.translatesAutoresizingMaskIntoConstraints = false
+        playSaveStackview.hidden = true
+        playSaveStackview.alpha = 0
+        playSaveStackview.axis = .Horizontal
+        
         stackView.addArrangedSubview(recordFart)
         recordFart.addTarget(self, action: #selector(BigTomFartsTableViewCell.recordFartTapped), forControlEvents: .TouchUpInside)
         
@@ -109,15 +112,27 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         playRecordedFartButton.backgroundColor = UIColor.redColor()
         playRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         playRecordedFartButton.setTitle("Tap to Play", forState: .Normal)
-        playRecordedFartButton.hidden = true
-        playRecordedFartButton.alpha = 0
+        //playRecordedFartButton.hidden = true
+        //playRecordedFartButton.alpha = 0
         playRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         playRecordedFartButton.addTarget(self, action: #selector(playTapped), forControlEvents: .TouchUpInside)
-        stackView.addArrangedSubview(playRecordedFartButton)
+        playSaveStackview.addArrangedSubview(playRecordedFartButton)
         
-        //addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v1]-[v0(30)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart, "v1": bigTimeFartsLogo]))
+        saveRecordedFartButton = UIButton()
+        saveRecordedFartButton.backgroundColor = UIColor.purpleColor()
+        saveRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
+        saveRecordedFartButton.setTitle("Save Fart", forState: .Normal)
+        //saveRecordedFartButton.hidden = true
+        //saveRecordedFartButton.alpha = 0
+        saveRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
+        saveRecordedFartButton.addTarget(self, action: #selector(saveTapped), forControlEvents: .TouchUpInside)
+        playSaveStackview.addArrangedSubview(saveRecordedFartButton)
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": bigTimeFartsLogo]))
+        stackView.addArrangedSubview(playSaveStackview)
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v0(50)]-[v1(30)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart, "v1": playSaveStackview]))
+        
+        //addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": bigTimeFartsLogo]))
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart]))
 
@@ -157,7 +172,20 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }
     
     func playTapped() {
+        let audioURL = BigTomFartsTableViewCell.getFartURL()
+        
+        do {
+            fartPlayer = try AVAudioPlayer(contentsOfURL: audioURL)
+            fartPlayer.prepareToPlay()
+            fartPlayer.play()
+        } catch {
+            let ac = UIAlertController(title: "Playback failed", message: "There was a problem playing your whistle; please try re-recording.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            //presentViewController(ac, animated: true, completion: nil)
+        }
+    }
     
+    func saveTapped() {
     
     }
     
@@ -191,6 +219,11 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
             UIView.animateWithDuration(0.35) { [unowned self] in
                 self.playRecordedFartButton.hidden = true
                 self.playRecordedFartButton.alpha = 0
+                self.saveRecordedFartButton.hidden = true
+                self.saveRecordedFartButton.alpha = 0
+                
+                self.playSaveStackview.hidden = true
+                self.playSaveStackview.alpha = 0
             }
         }
     }
@@ -208,6 +241,11 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
                 UIView.animateWithDuration(0.35) { [unowned self] in
                     self.playRecordedFartButton.hidden = false
                     self.playRecordedFartButton.alpha = 1
+                    self.saveRecordedFartButton.hidden = false
+                    self.saveRecordedFartButton.alpha = 1
+                    
+                    self.playSaveStackview.hidden = false
+                    self.playSaveStackview.alpha = 1
                 }
             }
             
