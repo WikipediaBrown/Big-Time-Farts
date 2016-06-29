@@ -10,50 +10,14 @@ import UIKit
 import AVFoundation
 
 class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
-
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: "BigTomFartsCell")
-        setupViews()
-        
-        fartRecordingSession = AVAudioSession.sharedInstance()
-        
-        do {
-            
-            try fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try fartRecordingSession.setActive(true)
-            fartRecordingSession.requestRecordPermission() {[unowned self] (allowed: Bool) -> Void in
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                
-                    if allowed {
-                    
-                        self.activateRecordButton()
-                    } else {
-                    
-                        self.deactivateRecordButton()
-                    }
-                }
-            
-            }
-            
-        
-        } catch {
-        
-            self.deactivateRecordButton()
-        }
-        
-        
-    }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    var stackView: UIStackView!
+    
+    var fartRecorder: AVAudioRecorder!
+    
+    var playRecordedFartButton: UIButton!
+    
+    var whistlePlayer: AVAudioPlayer!
     
     let bigTimeFartsLogo: UIImageView = {
         
@@ -64,7 +28,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }()
     
     let recordFart: UIButton = {
-    
+        
         let button = UIButton()
         button.backgroundColor = UIColor.blueColor()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -72,27 +36,91 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }()
     
     var fartRecordingSession: AVAudioSession = {
-    
+        
         let session = AVAudioSession()
         return session
     }()
     
-    var fartRecorder: AVAudioRecorder!
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: "BigTomFartsCell")
+        
+        fartRecordingSession = AVAudioSession.sharedInstance()
+        
+        do {
+            
+            try fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try fartRecordingSession.setActive(true)
+            fartRecordingSession.requestRecordPermission() {[unowned self] (allowed: Bool) -> Void in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    if allowed {
+                        
+                        self.activateRecordButton()
+                    } else {
+                        
+                        self.deactivateRecordButton()
+                    }
+                }
+                
+            }
+            
+            
+        } catch {
+            
+            self.deactivateRecordButton()
+        }
+        
+        stackView = UIStackView()
+        stackView.spacing = 30
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = UIStackViewDistribution.FillEqually
+        stackView.alignment = UIStackViewAlignment.Center
+        stackView.axis = .Vertical
+        addSubview(stackView)
+        
+        setupViews()
+
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView]))
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView]))
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
     
     
     func setupViews() {
-    
-        addSubview(recordFart)
+        
+        stackView.addArrangedSubview(bigTimeFartsLogo)
+        stackView.addArrangedSubview(recordFart)
         recordFart.addTarget(self, action: #selector(BigTomFartsTableViewCell.recordFartTapped), forControlEvents: .TouchUpInside)
-
-        addSubview(bigTimeFartsLogo)
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v1]-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart, "v1": bigTimeFartsLogo]))
+        playRecordedFartButton = UIButton()
+        playRecordedFartButton.backgroundColor = UIColor.redColor()
+        playRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
+        playRecordedFartButton.setTitle("Tap to Play", forState: .Normal)
+        playRecordedFartButton.hidden = true
+        playRecordedFartButton.alpha = 0
+        playRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
+        playRecordedFartButton.addTarget(self, action: #selector(playTapped), forControlEvents: .TouchUpInside)
+        stackView.addArrangedSubview(playRecordedFartButton)
         
-        
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart]))
+        //addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v1]-[v0(30)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart, "v1": bigTimeFartsLogo]))
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": bigTimeFartsLogo]))
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart]))
+
     }
     
     class func getDocumentsDirectory() -> NSString {
@@ -114,13 +142,13 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }
     
     func deactivateRecordButton() {
-    
+        
         print("poop")
-
+        
     }
     
     func recordFartTapped() {
-    
+        
         if fartRecorder == nil {
             startRecording()
         } else {
@@ -128,8 +156,13 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         }
     }
     
+    func playTapped() {
+    
+    
+    }
+    
     func startRecording() {
-
+        
         recordFart.backgroundColor = UIColor.redColor()
         
         recordFart.setTitle("Tap to Stop", forState: .Normal)
@@ -145,13 +178,20 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         ]
         
         do {
-
+            
             fartRecorder = try AVAudioRecorder(URL: fartURL, settings: fartSettings)
             fartRecorder.delegate = self
             fartRecorder.record()
         } catch {
             
             finishRecording(success: false)
+        }
+        
+        if !playRecordedFartButton.hidden {
+            UIView.animateWithDuration(0.35) { [unowned self] in
+                self.playRecordedFartButton.hidden = true
+                self.playRecordedFartButton.alpha = 0
+            }
         }
     }
     
@@ -163,7 +203,14 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         if success {
             recordFart.setTitle("Tap to Re-record", forState: .Normal)
-            //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .Plain, target: self, action: #selector(nextTapped))
+            
+            if playRecordedFartButton.hidden {
+                UIView.animateWithDuration(0.35) { [unowned self] in
+                    self.playRecordedFartButton.hidden = false
+                    self.playRecordedFartButton.alpha = 1
+                }
+            }
+            
         } else {
             recordFart.setTitle("Tap to Record", forState: .Normal)
             
@@ -172,5 +219,11 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
             //presentViewController(ac, animated: true, completion: nil)
         }
     }
-
+    
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
+    
 }

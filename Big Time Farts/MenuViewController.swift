@@ -15,11 +15,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         view.backgroundColor = UIColor.purpleColor()
         
-        fartTable.estimatedRowHeight = 50
-        fartTable.rowHeight = UITableViewAutomaticDimension
+        //fartTable.estimatedRowHeight = 50
+        //fartTable.rowHeight = UITableViewAutomaticDimension
         
-        fartTable.setNeedsLayout()
-        fartTable.layoutIfNeeded()
+        //fartTable.setNeedsLayout()
+        //fartTable.layoutIfNeeded()
         
         setupViews()
     }
@@ -30,6 +30,26 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
+    
+    func makeAttributedString(title title: String, subtitle: String) -> NSAttributedString {
+        
+        let titleAttributes = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline),
+            NSForegroundColorAttributeName: UIColor.blueColor()
+        ]
+        
+        let subtitleAttributes = [
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline),
+            NSForegroundColorAttributeName: UIColor.redColor()
+        ]
+        
+        let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
+        let subtitleString = NSAttributedString(string: "\(subtitle)", attributes: subtitleAttributes)
+        
+        titleString.appendAttributedString(subtitleString)
+        
+        return titleString
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
@@ -51,10 +71,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             
-            fartCell.textLabel?.text = fartList[indexPath.row].name
+            fartCell.textLabel?.attributedText = makeAttributedString(title: fartList[indexPath.row].title, subtitle: fartList[indexPath.row].subtitle)
+                
+            fartCell.textLabel?.numberOfLines = 0
             return fartCell
         }
     }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
@@ -86,6 +109,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             return 50
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func setupViews() {
