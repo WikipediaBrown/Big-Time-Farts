@@ -29,6 +29,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         let logo = UIImageView()
         logo.image = UIImage(named: "heart-full")
+        logo.contentMode = UIViewContentMode.ScaleAspectFit
         logo.translatesAutoresizingMaskIntoConstraints = false
         return logo
     }()
@@ -84,8 +85,6 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView]))
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[bigTimeFartsLogo]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["bigTimeFartsLogo": bigTimeFartsLogo]))
-        
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[bigTimeFartsLogo]-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView, "bigTimeFartsLogo": bigTimeFartsLogo]))
 
     }
@@ -102,7 +101,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         recordFart.addTarget(self, action: #selector(BigTomFartsTableViewCell.recordFartTapped), forControlEvents: .TouchUpInside)
 
         playSaveStackView = UIStackView()
-        playSaveStackView.spacing = 30
+        playSaveStackView.spacing = 10
         playSaveStackView.translatesAutoresizingMaskIntoConstraints = false
         playSaveStackView.hidden = true
         playSaveStackView.alpha = 0
@@ -114,8 +113,6 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         playRecordedFartButton.backgroundColor = UIColor.redColor()
         playRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         playRecordedFartButton.setTitle("Tap to Play", forState: .Normal)
-        playRecordedFartButton.hidden = true
-        playRecordedFartButton.alpha = 0
         playRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         playRecordedFartButton.addTarget(self, action: #selector(playTapped), forControlEvents: .TouchUpInside)
         playSaveStackView.addArrangedSubview(playRecordedFartButton)
@@ -124,19 +121,13 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         saveRecordedFartButton.backgroundColor = UIColor.purpleColor()
         saveRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         saveRecordedFartButton.setTitle("Save Fart", forState: .Normal)
-        saveRecordedFartButton.hidden = true
-        saveRecordedFartButton.alpha = 0
         saveRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         saveRecordedFartButton.addTarget(self, action: #selector(saveTapped), forControlEvents: .TouchUpInside)
         playSaveStackView.addArrangedSubview(saveRecordedFartButton)
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v0(50)]-[v1(30)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart, "v1": playSaveStackView]))
-        
-        //addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": bigTimeFartsLogo]))
-        
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": recordFart]))
         
-        //addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": playRecordedFartButton, "v1": saveRecordedFartButton]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": playRecordedFartButton, "v1": saveRecordedFartButton]))
 
     }
     
