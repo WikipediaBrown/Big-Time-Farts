@@ -19,6 +19,7 @@
 		7BEEB6491D1EB1E100B96281 /* MenuHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6481D1EB1E100B96281 /* MenuHeaderSection.swift */; };
 		7BEEB64D1D1F6BF000B96281 /* test-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */; };
 		7BEEB64F1D2050FA00B96281 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7BEEB64E1D2050FA00B96281 /* .gitignore */; };
+		7BF6C1781D25B6290083C0E4 /* DimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6C1771D25B6290083C0E4 /* DimmingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		7BEEB6481D1EB1E100B96281 /* MenuHeaderSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHeaderSection.swift; sourceTree = "<group>"; };
 		7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "test-2.mp3"; sourceTree = "<group>"; };
 		7BEEB64E1D2050FA00B96281 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7BF6C1771D25B6290083C0E4 /* DimmingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */,
 				7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */,
 				7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */,
+				7BF6C1771D25B6290083C0E4 /* DimmingViewController.swift */,
 				7BEEB6461D1EAFD000B96281 /* BigTomFartsTableViewCell.swift */,
 				7BEEB6481D1EB1E100B96281 /* MenuHeaderSection.swift */,
 				7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */,
@@ -161,6 +164,7 @@
 			files = (
 				7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */,
 				7BEEB6431D1E875B00B96281 /* FartData.swift in Sources */,
+				7BF6C1781D25B6290083C0E4 /* DimmingViewController.swift in Sources */,
 				7BEEB6471D1EAFD000B96281 /* BigTomFartsTableViewCell.swift in Sources */,
 				7B2356E21D1C8A1B004714A1 /* FartButtonViewController.swift in Sources */,
 				7BEEB6491D1EB1E100B96281 /* MenuHeaderSection.swift in Sources */,

@@ -66,6 +66,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let topCell = tableView.dequeueReusableCellWithIdentifier("BigTomFartsCell", forIndexPath: indexPath) as! BigTomFartsTableViewCell
             topCell.selectionStyle = UITableViewCellSelectionStyle.None
+            topCell.saveRecordedFartButton.addTarget(self, action: #selector(self.dimView), forControlEvents: .TouchUpInside)
             return topCell
         } else {
             
@@ -126,7 +127,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let navBarItem = UINavigationItem()
         navBar.items = [navBarItem]
         
-        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.dismissMenu))
+        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.dimView))
         
         self.view.addSubview(fartTable)
         fartTable.delegate = self
@@ -147,6 +148,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         
+    }
+    
+    func dimView() {
+    
+        let dimmer = DimmingViewController()
+        dimmer.modalPresentationStyle = .Custom
+        dimmer.modalTransitionStyle = .CrossDissolve
+        presentViewController(dimmer, animated: true, completion: nil)
     }
     
 }
