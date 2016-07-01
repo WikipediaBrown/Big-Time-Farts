@@ -24,6 +24,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupViews()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        fartTable.setNeedsLayout()
+        fartTable.layoutIfNeeded()
+    }
+    
     let fartTable: UITableView = {
         
         let table = UITableView()
@@ -31,7 +36,31 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         return table
     }()
     
-    func makeAttributedString(title title: String, subtitle: String) -> NSAttributedString {
+    func makeAttributedString(title title: String, subtitle: String, date: NSDate) -> NSAttributedString {
+        
+        var subDate = subtitle
+
+        
+        if subtitle == "" {
+            
+        //var currentDate = NSDate()
+        
+        let outputFormatter = NSDateFormatter()
+        
+            outputFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+            
+            subDate = outputFormatter.stringFromDate(date)
+        
+            print(subDate)
+        
+        
+        }
+        
+        
+        
+        
+        
+        
         
         let titleAttributes = [
             NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline),
@@ -44,12 +73,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         ]
         
         let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
-        let subtitleString = NSAttributedString(string: "\(subtitle)", attributes: subtitleAttributes)
+        let subtitleString = NSAttributedString(string: "\(subDate)", attributes: subtitleAttributes)
         
         titleString.appendAttributedString(subtitleString)
         
         return titleString
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
@@ -72,7 +102,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             
-            fartCell.textLabel?.attributedText = makeAttributedString(title: fartList[indexPath.row].title, subtitle: fartList[indexPath.row].subtitle)
+            fartCell.textLabel?.attributedText = makeAttributedString(title: fartList[indexPath.row].title, subtitle: fartList[indexPath.row].subtitle, date: fartList[indexPath.row].date)
                 
             fartCell.textLabel?.numberOfLines = 0
             return fartCell
@@ -127,7 +157,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let navBarItem = UINavigationItem()
         navBar.items = [navBarItem]
         
-        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.dimView))
+        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.dismissMenu))
         
         self.view.addSubview(fartTable)
         fartTable.delegate = self
@@ -137,7 +167,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         fartTable.registerClass(MenuHeaderSection.self, forHeaderFooterViewReuseIdentifier: "MenuHeader")
         
         fartTable.separatorStyle = .None
-        
         let viewsDictionary = ["v0": fartTable]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))

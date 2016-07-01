@@ -14,6 +14,7 @@ struct FartData {
     var title: String
     var subtitle: String
     let fartSound: NSURL
+    var date: NSDate
 }
 
 var fartSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!)
@@ -22,6 +23,6 @@ var fartSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("te
 
 var fartList = [
         
-    FartData(sectionName: "fartSelect", title: "first-fart", subtitle: "System Fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!)),
-    FartData(sectionName: "fartSelect", title: "second-fart", subtitle: "System Fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-2", ofType: "mp3")!))
+    FartData(sectionName: "fartSelect", title: "first-fart", subtitle: "System Fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!), date: NSDate()),
+    FartData(sectionName: "fartSelect", title: "second-fart", subtitle: "System Fart", fartSound: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-2", ofType: "mp3")!), date: NSDate())
 ]

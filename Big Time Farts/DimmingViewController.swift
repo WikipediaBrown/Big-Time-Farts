@@ -25,7 +25,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
     var fartNameView: UITextField!
     
     var backgroundView: UIView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clearColor()
@@ -101,7 +101,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[v1]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[v1]-300-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-
+        
         
         
         
@@ -114,9 +114,8 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
             }, completion: nil)
         
         self.dismissViewControllerAnimated(true) {
-            
         }
-    
+        
     }
     
     func cancelFartButtonTapped() {
@@ -126,7 +125,32 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func saveFartButtonTapped() {
         
-        print("poop")
-    }
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let fileManager = NSFileManager.defaultManager()
+        let files = try? fileManager.contentsOfDirectoryAtPath(documentsPath)
+        let count = files!.count
+        print (count)
+    
+        let fartName = fartNameView.text
+        
+        
+        
+        do {
+            let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+            let originPath = documentDirectory.URLByAppendingPathComponent("/fart.m4a")
+            let destinationPath = documentDirectory.URLByAppendingPathComponent("/\(fartName)-\(count)-userAdded.m4A")
+            try NSFileManager.defaultManager().moveItemAtURL(originPath, toURL: destinationPath)
+            
+            let newFart = FartData(sectionName: "fartSelect", title: fartName!, subtitle: "\(time)", fartSound: destinationPath, date: NSDate())
+            fartList.append(newFart)
+            
+            fartNameView.resignFirstResponder()
+            dismissFartSave()
 
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        
+    }
 }

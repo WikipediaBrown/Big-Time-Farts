@@ -189,7 +189,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         recordFart.setTitle("Tap to Stop", forState: .Normal)
         
         let fartURL = BigTomFartsTableViewCell.getFartURL()
-        print(fartURL.absoluteString)
+        //print(fartURL.absoluteString)
         
         let fartSettings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
