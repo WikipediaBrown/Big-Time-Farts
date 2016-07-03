@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreData
 
 class FartButtonViewController: UIViewController {
 
@@ -64,7 +65,7 @@ class FartButtonViewController: UIViewController {
             self.fartPlayer.play()
         } catch {
         
-            print("Error getting the fart file")
+            print("Error getting the fart file: \(error)")
         }
     }
     

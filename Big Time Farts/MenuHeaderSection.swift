@@ -24,7 +24,8 @@ class MenuHeaderSection: UITableViewHeaderFooterView {
     
     let collectionHeader: UILabel = {
         var noteCount = UILabel()
-        noteCount.text = "There are 2 farts"
+        noteCount.text = "Select a fart from the Fart Locker"
+        noteCount.textAlignment = .Center
         noteCount.font = UIFont.boldSystemFontOfSize(14)
         noteCount.textColor = UIColor.blueColor()
         noteCount.translatesAutoresizingMaskIntoConstraints = false

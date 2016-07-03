@@ -12,6 +12,8 @@
 		7B2356E71D1C8A1B004714A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E61D1C8A1B004714A1 /* Assets.xcassets */; };
 		7B2356EA1D1C8A1B004714A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */; };
 		7B2356F21D1CC85E004714A1 /* test-fart.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356F11D1CC85E004714A1 /* test-fart.mp3 */; };
+		7BD782B01D29995F000E6890 /* Fart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD782AE1D29995F000E6890 /* Fart+CoreDataProperties.swift */; };
+		7BD782B11D29995F000E6890 /* Fart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD782AF1D29995F000E6890 /* Fart.swift */; };
 		7BEEB6411D1E2D3E00B96281 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */; };
 		7BEEB6431D1E875B00B96281 /* FartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6421D1E875B00B96281 /* FartData.swift */; };
 		7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */; };
@@ -20,6 +22,7 @@
 		7BEEB64D1D1F6BF000B96281 /* test-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */; };
 		7BEEB64F1D2050FA00B96281 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7BEEB64E1D2050FA00B96281 /* .gitignore */; };
 		7BF6C1781D25B6290083C0E4 /* DimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6C1771D25B6290083C0E4 /* DimmingViewController.swift */; };
+		7BF6C17D1D28013B0083C0E4 /* FartModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6C17B1D28013B0083C0E4 /* FartModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,8 @@
 		7B2356E91D1C8A1B004714A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B2356EB1D1C8A1B004714A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B2356F11D1CC85E004714A1 /* test-fart.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "test-fart.mp3"; sourceTree = "<group>"; };
+		7BD782AE1D29995F000E6890 /* Fart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fart+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7BD782AF1D29995F000E6890 /* Fart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fart.swift; sourceTree = "<group>"; };
 		7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BEEB6421D1E875B00B96281 /* FartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartData.swift; sourceTree = "<group>"; };
 		7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartTableViewCell.swift; sourceTree = "<group>"; };
@@ -38,6 +43,7 @@
 		7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "test-2.mp3"; sourceTree = "<group>"; };
 		7BEEB64E1D2050FA00B96281 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7BF6C1771D25B6290083C0E4 /* DimmingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingViewController.swift; sourceTree = "<group>"; };
+		7BF6C17C1D28013B0083C0E4 /* FartModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FartModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +77,10 @@
 		7B2356DE1D1C8A1B004714A1 /* Big Time Farts */ = {
 			isa = PBXGroup;
 			children = (
+				7BD782AE1D29995F000E6890 /* Fart+CoreDataProperties.swift */,
+				7BD782AF1D29995F000E6890 /* Fart.swift */,
 				7BEEB6421D1E875B00B96281 /* FartData.swift */,
+				7BF6C17B1D28013B0083C0E4 /* FartModel.xcdatamodeld */,
 				7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */,
 				7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */,
 				7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */,
@@ -165,8 +174,11 @@
 				7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */,
 				7BEEB6431D1E875B00B96281 /* FartData.swift in Sources */,
 				7BF6C1781D25B6290083C0E4 /* DimmingViewController.swift in Sources */,
+				7BD782B11D29995F000E6890 /* Fart.swift in Sources */,
 				7BEEB6471D1EAFD000B96281 /* BigTomFartsTableViewCell.swift in Sources */,
+				7BF6C17D1D28013B0083C0E4 /* FartModel.xcdatamodeld in Sources */,
 				7B2356E21D1C8A1B004714A1 /* FartButtonViewController.swift in Sources */,
+				7BD782B01D29995F000E6890 /* Fart+CoreDataProperties.swift in Sources */,
 				7BEEB6491D1EB1E100B96281 /* MenuHeaderSection.swift in Sources */,
 				7BEEB6411D1E2D3E00B96281 /* MenuViewController.swift in Sources */,
 				7B2356E01D1C8A1B004714A1 /* AppDelegate.swift in Sources */,
@@ -320,6 +332,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BF6C17B1D28013B0083C0E4 /* FartModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BF6C17C1D28013B0083C0E4 /* FartModel.xcdatamodel */,
+			);
+			currentVersion = 7BF6C17C1D28013B0083C0E4 /* FartModel.xcdatamodel */;
+			path = FartModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7B2356D41D1C8A1B004714A1 /* Project object */;
 }

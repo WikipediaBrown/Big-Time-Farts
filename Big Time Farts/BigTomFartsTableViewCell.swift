@@ -9,11 +9,12 @@
 import UIKit
 import AVFoundation
 
+var playSaveStackView: UIStackView!
+
+
 class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     
     var stackView: UIStackView!
-    
-    var playSaveStackView: UIStackView!
     
     var fartRecordingSession: AVAudioSession!
     
@@ -180,6 +181,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     
     func saveTapped() {
         
+        
     }
     
     func startRecording() {
@@ -215,8 +217,8 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
                 self.saveRecordedFartButton.hidden = true
                 self.saveRecordedFartButton.alpha = 0
                 
-                self.playSaveStackView.hidden = true
-                self.playSaveStackView.alpha = 0
+                playSaveStackView.hidden = true
+                playSaveStackView.alpha = 0
             }
         }
     }
@@ -237,8 +239,8 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
                     self.saveRecordedFartButton.hidden = false
                     self.saveRecordedFartButton.alpha = 1
                     
-                    self.playSaveStackView.hidden = false
-                    self.playSaveStackView.alpha = 1
+                    playSaveStackView.hidden = false
+                    playSaveStackView.alpha = 1
                 }
             }
             
