@@ -8,16 +8,16 @@
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
-//
-//import Foundation
-//import CoreData
-//
-//extension Fart {
-//
-//    @NSManaged var date: NSDate?
-//    @NSManaged var fartSound: String?
-//    @NSManaged var sectionName: String?
-//    @NSManaged var subtitle: String?
-//    @NSManaged var title: String?
-//
-//}
+
+import Foundation
+import CoreData
+
+extension Fart {
+
+    @NSManaged var date: NSDate?
+    @NSManaged var fartSound: String?
+    @NSManaged var sectionName: String?
+    @NSManaged var subtitle: String?
+    @NSManaged var title: String?
+
+}

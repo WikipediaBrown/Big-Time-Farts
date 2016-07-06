@@ -58,9 +58,11 @@ class FartButtonViewController: UIViewController {
     
     func playFart() {
         
+        let sound = NSURL(string: fartSound)
+        
         do {
             
-            self.fartPlayer = try AVAudioPlayer(contentsOfURL: fartSound)
+            self.fartPlayer = try AVAudioPlayer(contentsOfURL: sound!)
             self.fartPlayer.prepareToPlay()
             self.fartPlayer.play()
         } catch {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -64,7 +65,6 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         mainViewHeader.backgroundColor = UIColor.whiteColor()
         editStackView.addArrangedSubview(mainViewHeader)
         
-        //mainView = UIView(frame: CGRect(x: (view.frame.width/2) - 125, y: -300, width: 250, height: 300))
         mainView = UILabel()
         mainView.text = "Enter the name of your fart below."
         mainView.textAlignment = .Center
@@ -151,15 +151,23 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
             let count = files!.count
             print (count)
             
+            let context = delegate?.managedObjectContext
+            
             do {
                 let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
                 let originPath = documentDirectory.URLByAppendingPathComponent("/fart.m4a")
                 let destinationPath = documentDirectory.URLByAppendingPathComponent("/\(fartName)-\(count)-userAdded.m4A")
                 try NSFileManager.defaultManager().moveItemAtURL(originPath, toURL: destinationPath)
                 
-                let newFart = FartData(sectionName: "fartSelect", title: fartName!, subtitle: "\(time)", fartSound: destinationPath, date: NSDate())
-                fartList.append(newFart)
+                let newFart = NSEntityDescription.insertNewObjectForEntityForName("Fart", inManagedObjectContext: context!) as! Fart
+                newFart.sectionName = "fartSelect"
+                newFart.title = fartName
+                newFart.subtitle = ""
+                newFart.fartSound = destinationPath.absoluteString
+                newFart.date = NSDate()
                 
+                fartList?.append(newFart)
+            
             } catch let error as NSError {
                 print(error.localizedDescription)
             }

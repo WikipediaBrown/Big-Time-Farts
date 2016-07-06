@@ -20,9 +20,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         fartTable.setNeedsLayout()
         fartTable.layoutIfNeeded()
+        setupFartData()
         
         setupViews()
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadFarts),name:"load", object: nil)
         
     }
@@ -40,8 +40,19 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let timeFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEEE, MMMM dd"
         timeFormatter.dateFormat = "H:m:s a"
-        let underText = "\(dateFormatter.stringFromDate(date)) at \(timeFormatter.stringFromDate(date))"
 
+//        let today = NSDate()
+//        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+//        let todayAtMidnight = calendar?.startOfDayForDate(today)
+//        print(todayAtMidnight)
+        
+        var underText = subtitle
+        
+        
+        if subtitle == "" {
+        
+            underText = "\(dateFormatter.stringFromDate(date)) at \(timeFormatter.stringFromDate(date))"
+        }
         
         
         let titleAttributes = [
@@ -69,7 +80,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 1
         } else {
             
-            return fartList.count
+            return fartList!.count
         }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -84,7 +95,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             
-            fartCell.textLabel?.attributedText = makeAttributedString(title: fartList[indexPath.row].title, subtitle: fartList[indexPath.row].subtitle, date: fartList[indexPath.row].date)
+            fartCell.textLabel?.attributedText = makeAttributedString(title: fartList![indexPath.row].title!, subtitle: fartList![indexPath.row].subtitle!, date: fartList![indexPath.row].date!)
             
             fartCell.textLabel?.numberOfLines = 0
             return fartCell
@@ -111,7 +122,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        fartSound = fartList[indexPath.row].fartSound
+        fartSound = fartList![indexPath.row].fartSound!
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
