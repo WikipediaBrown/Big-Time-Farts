@@ -41,10 +41,12 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         dateFormatter.dateFormat = "EEEE, MMMM dd"
         timeFormatter.dateFormat = "H:m:s a"
 
-//        let today = NSDate()
-//        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-//        let todayAtMidnight = calendar?.startOfDayForDate(today)
-//        print(todayAtMidnight)
+        let today = NSDate()
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let todayAtMidnight = calendar?.startOfDayForDate(today)
+        print(todayAtMidnight)
+        
+        
         
         var underText = subtitle
         
@@ -78,9 +80,12 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         if section == 0 {
             
             return 1
-        } else {
+        } else if section == 1 {
+        
+            return systemFartList.count
+        } else{
             
-            return fartList!.count
+            return userFartList!.count
         }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -91,11 +96,21 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             topCell.selectionStyle = UITableViewCellSelectionStyle.None
             topCell.saveRecordedFartButton.addTarget(self, action: #selector(self.dimView), forControlEvents: .TouchUpInside)
             return topCell
-        } else {
+        } else if indexPath.section == 1 {
             
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             
-            fartCell.textLabel?.attributedText = makeAttributedString(title: fartList![indexPath.row].title!, subtitle: fartList![indexPath.row].subtitle!, date: fartList![indexPath.row].date!)
+            fartCell.textLabel?.attributedText = makeAttributedString(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
+            
+            fartCell.textLabel?.numberOfLines = 0
+            return fartCell
+        
+        
+        } else {
+    
+            let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
+            
+            fartCell.textLabel?.attributedText = makeAttributedString(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
             
             fartCell.textLabel?.numberOfLines = 0
             return fartCell
@@ -103,35 +118,51 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
             
             return nil
-            
-            
-        } else {
-            
+        } else if section == 1 {
+        
             let headerCell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader")
             return headerCell
-            
+        } else {
+
+            return nil
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        fartSound = fartList![indexPath.row].fartSound!
+//        fartSound = fartList![indexPath.row].fartSound!
+        
+        switch indexPath.section {
+            
+        case 0: break
+            
+        case 1: fartSound = systemFartList[indexPath.row].fartSound
+            
+        case 2: fartSound = userFartList![indexPath.row].fartSound!
+
+        default: break
+        }
     }
+    
+//    func tableView
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             
             return 0
-        } else {
+        } else if section == 1 {
             
             return 50
+        } else {
+        
+            return 0
         }
     }
     
