@@ -8,21 +8,20 @@
 
 import UIKit
 import AVFoundation
-import CoreData
 
 class FartButtonViewController: UIViewController {
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.redColor()
+        self.view.backgroundColor = .whiteColor()
         setupButton()
     }
 
     let fartButton: UIButton = {
         
         let button = UIButton()
-        button.backgroundColor = UIColor.brownColor()
+        button.setImage(UIImage(named: "heart-full"), forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -30,7 +29,9 @@ class FartButtonViewController: UIViewController {
     let menuButton: UIButton = {
         
         let button = UIButton()
-        button.backgroundColor = UIColor.greenColor()
+        button.layer.cornerRadius = 17
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.blackColor().CGColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -40,9 +41,7 @@ class FartButtonViewController: UIViewController {
         return player
     
     }()
-    
-    //let fartSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!)
-    
+        
     func setupButton() {
     
         self.view.addSubview(fartButton)
@@ -57,13 +56,10 @@ class FartButtonViewController: UIViewController {
     }
     
     func playFart() {
-        
-        let sound = NSURL(string: fartSound)
-        
+
         do {
             
-            self.fartPlayer = try AVAudioPlayer(contentsOfURL: sound!)
-            self.fartPlayer.prepareToPlay()
+            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: fartSound)!)
             self.fartPlayer.play()
         } catch {
         

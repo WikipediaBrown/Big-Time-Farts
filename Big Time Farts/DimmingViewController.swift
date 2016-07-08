@@ -166,7 +166,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
                 newFart.fartSound = destinationPath.absoluteString
                 newFart.date = NSDate()
                 
-                fartList?.append(newFart)
+                userFartList?.append(newFart)
                 try context!.save()
 
             } catch let error as NSError {
