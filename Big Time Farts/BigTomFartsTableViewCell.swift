@@ -11,12 +11,14 @@ import AVFoundation
 
 var playSaveStackView: UIStackView!
 
+var fartRecordingSession = AVAudioSession.sharedInstance()
+
 
 class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     
     var stackView: UIStackView!
     
-    var fartRecordingSession: AVAudioSession!
+//    var fartRecordingSession: AVAudioSession!
     
     var fartRecorder: AVAudioRecorder!
     
@@ -46,12 +48,13 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "BigTomFartsCell")
         
-        fartRecordingSession = AVAudioSession.sharedInstance()
+//        fartRecordingSession = AVAudioSession.sharedInstance()
         
         do {
             
             try fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try fartRecordingSession.setActive(true)
+            try fartRecordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
             fartRecordingSession.requestRecordPermission() {[unowned self] (allowed: Bool) -> Void in
                 
                 dispatch_async(dispatch_get_main_queue()) {
@@ -139,9 +142,9 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }
     
     class func getFartURL() -> NSURL {
+        
         let audioFilename = getDocumentsDirectory().stringByAppendingPathComponent("fart.m4a")
         let audioURL = NSURL(fileURLWithPath: audioFilename)
-        
         return audioURL
     }
     
@@ -170,7 +173,6 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         do {
             fartPlayer = try AVAudioPlayer(contentsOfURL: audioURL)
-            fartPlayer.prepareToPlay()
             fartPlayer.play()
         } catch {
             let ac = UIAlertController(title: "Playback failed", message: "There was a problem playing your whistle; please try re-recording.", preferredStyle: .Alert)
@@ -191,13 +193,13 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         recordFart.setTitle("Tap to Stop", forState: .Normal)
         
         let fartURL = BigTomFartsTableViewCell.getFartURL()
-        //print(fartURL.absoluteString)
         
         let fartSettings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000.0,
-            AVNumberOfChannelsKey: 1 as NSNumber,
-            AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+            AVEncoderBitRateKey: 320000,
+            AVSampleRateKey: 44100.0,
+            AVNumberOfChannelsKey: 2 as NSNumber,
+            AVEncoderAudioQualityKey: AVAudioQuality.Max.rawValue
         ]
         
         do {

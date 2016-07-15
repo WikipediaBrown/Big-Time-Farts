@@ -48,11 +48,13 @@ class FartButtonViewController: UIViewController {
         self.view.addSubview(menuButton)
         fartButton.addTarget(self, action: #selector(FartButtonViewController.playFart), forControlEvents: .TouchUpInside)
         menuButton.addTarget(self, action: #selector(FartButtonViewController.showMenu), forControlEvents: .TouchUpInside)
+        
+        try? fartRecordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
 
         let viewsDictionary = ["v0": fartButton, "v1": menuButton]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[v1]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[v0]-20-[v1]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[v0]-20-[v1(100)]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
     
     func playFart() {
