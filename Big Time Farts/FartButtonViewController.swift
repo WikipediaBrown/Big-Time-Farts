@@ -49,6 +49,8 @@ class FartButtonViewController: UIViewController {
         fartButton.addTarget(self, action: #selector(FartButtonViewController.playFart), forControlEvents: .TouchUpInside)
         menuButton.addTarget(self, action: #selector(FartButtonViewController.showMenu), forControlEvents: .TouchUpInside)
         
+        try? fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        try? fartRecordingSession.setActive(true)
         try? fartRecordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
 
         let viewsDictionary = ["v0": fartButton, "v1": menuButton]
