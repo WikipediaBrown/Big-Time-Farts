@@ -48,8 +48,6 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "BigTomFartsCell")
         
-//        fartRecordingSession = AVAudioSession.sharedInstance()
-        
         do {
             
             try fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -182,8 +180,6 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }
     
     func saveTapped() {
-        
-        
     }
     
     func startRecording() {

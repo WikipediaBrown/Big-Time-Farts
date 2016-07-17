@@ -12,9 +12,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var fleek1 = defaults.objectForKey("defaultFart")
-        
-        print(fleek1)
         
         view.backgroundColor = UIColor.purpleColor()
         
@@ -105,9 +102,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             
-            fartCell.textLabel?.attributedText = makeAttributedString(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
+            fartCell.fartDescriptionn.attributedText = makeAttributedString(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
             
-            fartCell.textLabel?.numberOfLines = 0
+            fartCell.cellIndexPath = indexPath.row
+            
+            fartCell.cellSection = indexPath.section
+            
+            fartCell.fartDescriptionn.numberOfLines = 0
             return fartCell
         
         
@@ -115,9 +116,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             
-            fartCell.textLabel?.attributedText = makeAttributedString(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
+            fartCell.fartDescriptionn.attributedText = makeAttributedString(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
             
-            fartCell.textLabel?.numberOfLines = 0
+            fartCell.cellIndexPath = indexPath.row
+            
+            fartCell.cellSection = indexPath.section
+            
+            fartCell.fartDescriptionn.numberOfLines = 0
             return fartCell
         }
     }
@@ -147,17 +152,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0: break
             
         case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
-        var fleek1 = defaults.objectForKey("defaultFart")
-
-        print(fleek1)
-
-            //fartSound = systemFartList[indexPath.row].fartSound
             
         case 2: defaults.setObject(userFartList![indexPath.row].fartSound!, forKey: "defaultFart")
-        var fleek2 = defaults.objectForKey("defaultFart")
-        
-        print(fleek2)
-            //fartSound = userFartList![indexPath.row].fartSound!
 
         default: break
         }
