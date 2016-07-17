@@ -10,12 +10,21 @@ import UIKit
 import AVFoundation
 
 class FartButtonViewController: UIViewController {
+    
+    var chosenFart = defaults.objectForKey("defaultFart")
+
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.view.backgroundColor = .whiteColor()
         setupButton()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        var fleek1 = defaults.objectForKey("defaultFart")
+        
+        print(fleek1)
     }
 
     let fartButton: UIButton = {
@@ -63,9 +72,11 @@ class FartButtonViewController: UIViewController {
 
         do {
             
-            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: fartSound)!)
+            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: defaults.objectForKey("defaultFart") as! String)!)
             self.fartPlayer.play()
-        } catch {
+            var fleek1 = defaults.objectForKey("defaultFart")
+            
+            print(fleek1)        } catch {
         
             print("Error getting the fart file: \(error)")
         }

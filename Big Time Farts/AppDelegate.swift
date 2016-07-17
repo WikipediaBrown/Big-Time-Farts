@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = rootViewController
         
         UIApplication.sharedApplication().statusBarStyle = .Default
+        
+        let defaultFartHolder = ["defaultFart": initialFart]
+        
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaultFartHolder)
 
         return true
     }

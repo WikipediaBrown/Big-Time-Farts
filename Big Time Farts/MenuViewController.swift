@@ -12,6 +12,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var fleek1 = defaults.objectForKey("defaultFart")
+        
+        print(fleek1)
         
         view.backgroundColor = UIColor.purpleColor()
         
@@ -24,6 +27,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setupViews()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadFarts),name:"load", object: nil)
+        
+        
         
     }
     
@@ -136,22 +141,27 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-//        fartSound = fartList![indexPath.row].fartSound!
-        
+                
         switch indexPath.section {
             
         case 0: break
             
-        case 1: fartSound = systemFartList[indexPath.row].fartSound
+        case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
+        var fleek1 = defaults.objectForKey("defaultFart")
+
+        print(fleek1)
+
+            //fartSound = systemFartList[indexPath.row].fartSound
             
-        case 2: fartSound = userFartList![indexPath.row].fartSound!
+        case 2: defaults.setObject(userFartList![indexPath.row].fartSound!, forKey: "defaultFart")
+        var fleek2 = defaults.objectForKey("defaultFart")
+        
+        print(fleek2)
+            //fartSound = userFartList![indexPath.row].fartSound!
 
         default: break
         }
     }
-    
-//    func tableView
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
