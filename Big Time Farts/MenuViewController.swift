@@ -10,11 +10,7 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var selectedFart: NSIndexPath = {
-        
-        let selectedIndexPath = NSIndexPath()
-        return selectedIndexPath
-    }()
+    var selectedFart: NSIndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,14 +170,26 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0: break
             
         case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
+        
+        if selectedFart != nil {
+        
         let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
         oldFartCell.fartSelectedImage.hidden = true
+        
+        }
+        
         let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         fartCell.fartSelectedImage.hidden = false
             
         case 2: defaults.setObject(userFartList![indexPath.row].fartSound!, forKey: "defaultFart")
-        let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
-        oldFartCell.fartSelectedImage.hidden = true
+        
+        if selectedFart != nil {
+            
+            let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
+            oldFartCell.fartSelectedImage.hidden = true
+            
+        }
+        
         let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         fartCell.fartSelectedImage.hidden = false
             

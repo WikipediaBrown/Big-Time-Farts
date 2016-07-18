@@ -41,6 +41,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         let button = UIButton()
         button.backgroundColor = UIColor.blueColor()
+        button.setTitle("Record your own fart", forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -184,7 +185,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     
     func startRecording() {
         
-        recordFart.backgroundColor = UIColor.redColor()
+        recordFart.backgroundColor = .redColor()
         
         recordFart.setTitle("Tap to Stop", forState: .Normal)
         
@@ -222,7 +223,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }
     
     func finishRecording(success success: Bool) {
-        recordFart.backgroundColor = UIColor.greenColor()
+        recordFart.backgroundColor = .greenColor()
         
         fartRecorder.stop()
         fartRecorder = nil
