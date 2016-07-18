@@ -40,7 +40,10 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     let recordFart: UIButton = {
         
         let button = UIButton()
-        button.backgroundColor = UIColor.blueColor()
+        button.backgroundColor = .clearColor()
+        button.layer.borderColor = UIColor.whiteColor().CGColor
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 17
         button.setTitle("Record your own fart", forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -84,6 +87,8 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         addSubview(stackView)
         
         setupViews()
+        
+        backgroundColor = UIColor.darkGrayColor()
 
         
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[stackView]-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: ["stackView": stackView]))
@@ -113,17 +118,25 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         
         playRecordedFartButton = UIButton()
-        playRecordedFartButton.backgroundColor = UIColor.redColor()
+        playRecordedFartButton.backgroundColor = .clearColor()
         playRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
-        playRecordedFartButton.setTitle("Tap to Play", forState: .Normal)
+        playRecordedFartButton.setAttributedTitle(makeButtonTitle("Tap to Play"), forState: .Normal)
+//        playRecordedFartButton.setTitle("Tap to Play", forState: .Normal)
+        playRecordedFartButton.layer.borderWidth = 2
+        playRecordedFartButton.layer.borderColor = UIColor.whiteColor().CGColor
+        playRecordedFartButton.layer.cornerRadius = 17.5
         playRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         playRecordedFartButton.addTarget(self, action: #selector(playTapped), forControlEvents: .TouchUpInside)
         playSaveStackView.addArrangedSubview(playRecordedFartButton)
         
         saveRecordedFartButton = UIButton()
-        saveRecordedFartButton.backgroundColor = UIColor.purpleColor()
+        saveRecordedFartButton.backgroundColor = .clearColor()
         saveRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
-        saveRecordedFartButton.setTitle("Save Fart", forState: .Normal)
+        saveRecordedFartButton.setAttributedTitle(makeButtonTitle("Save Fart"), forState: .Normal)
+//        saveRecordedFartButton.setTitle("Save Fart", forState: .Normal)
+        saveRecordedFartButton.layer.borderWidth = 2
+        saveRecordedFartButton.layer.borderColor = UIColor.whiteColor().CGColor
+        saveRecordedFartButton.layer.cornerRadius = 17.5
         saveRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         saveRecordedFartButton.addTarget(self, action: #selector(saveTapped), forControlEvents: .TouchUpInside)
         playSaveStackView.addArrangedSubview(saveRecordedFartButton)
@@ -186,6 +199,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     func startRecording() {
         
         recordFart.backgroundColor = .redColor()
+        recordFart.setTitleColor(.whiteColor(), forState: .Normal)
         
         recordFart.setTitle("Tap to Stop", forState: .Normal)
         
@@ -223,7 +237,8 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     }
     
     func finishRecording(success success: Bool) {
-        recordFart.backgroundColor = .greenColor()
+        recordFart.backgroundColor = .clearColor()
+        recordFart.setTitleColor(.redColor(), forState: .Normal)
         
         fartRecorder.stop()
         fartRecorder = nil

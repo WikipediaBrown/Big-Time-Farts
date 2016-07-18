@@ -9,6 +9,30 @@
 import UIKit
 import CoreData
 
+
+
+
+
+func makeButtonTitle(title: String) -> NSAttributedString {
+    
+    
+    let titleAttributes = [
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1),
+    ]
+    
+    let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
+    
+    
+    return titleString
+}
+
+
+
+
+
+
+
+
 let initialFart = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!).absoluteString
 
 var defaults = NSUserDefaults.standardUserDefaults()
