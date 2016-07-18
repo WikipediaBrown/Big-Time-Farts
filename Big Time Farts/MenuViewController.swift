@@ -10,6 +10,12 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var selectedFart: NSIndexPath = {
+        
+        let selectedIndexPath = NSIndexPath()
+        return selectedIndexPath
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,14 +99,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-//        if cellSection == 1 && defaults.objectForKey("defaultFart") as? String == systemFartList[cellIndexPath].fartSound {
-//            fartSelectedImage.hidden = false
-//            
-//        } else if cellSection == 2 && defaults.objectForKey("defaultFart") as? String == userFartList![cellIndexPath].fartSound {
-//            fartSelectedImage.hidden = false
-//            
-//        }
-        
         if indexPath.section == 0 {
             
             let topCell = tableView.dequeueReusableCellWithIdentifier("BigTomFartsCell", forIndexPath: indexPath) as! BigTomFartsTableViewCell
@@ -109,14 +107,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             return topCell
         } else if indexPath.section == 1 {
             
-            
-            
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
             fartCell.selectionStyle = UITableViewCellSelectionStyle.None
             
             if defaults.objectForKey("defaultFart") as? String == systemFartList[indexPath.row].fartSound {
-                fartCell.fartSelectedImage.hidden = false
                 
+                fartCell.fartSelectedImage.hidden = false
+                selectedFart = indexPath
             }
             
             fartCell.fartDescriptionn.attributedText = makeAttributedString(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
@@ -135,8 +132,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             fartCell.selectionStyle = UITableViewCellSelectionStyle.None
             
             if defaults.objectForKey("defaultFart") as? String == userFartList![indexPath.row].fartSound {
-                fartCell.fartSelectedImage.hidden = false
                 
+                fartCell.fartSelectedImage.hidden = false
+                selectedFart = indexPath
             }
             
             fartCell.fartDescriptionn.attributedText = makeAttributedString(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
@@ -176,10 +174,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0: break
             
         case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
+        let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
+        oldFartCell.fartSelectedImage.hidden = true
         let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         fartCell.fartSelectedImage.hidden = false
             
         case 2: defaults.setObject(userFartList![indexPath.row].fartSound!, forKey: "defaultFart")
+        let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
+        oldFartCell.fartSelectedImage.hidden = true
         let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         fartCell.fartSelectedImage.hidden = false
             
