@@ -42,7 +42,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let timeFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEEE, MMMM dd"
         timeFormatter.dateFormat = "H:m:s a"
-
+        
         let today = NSDate()
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let todayAtMidnight = calendar?.startOfDayForDate(today)
@@ -54,7 +54,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         if subtitle == "" {
-        
+            
             underText = "\(dateFormatter.stringFromDate(date)) at \(timeFormatter.stringFromDate(date))"
         }
         
@@ -83,7 +83,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             return 1
         } else if section == 1 {
-        
+            
             return systemFartList.count
         } else{
             
@@ -91,6 +91,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+//        if cellSection == 1 && defaults.objectForKey("defaultFart") as? String == systemFartList[cellIndexPath].fartSound {
+//            fartSelectedImage.hidden = false
+//            
+//        } else if cellSection == 2 && defaults.objectForKey("defaultFart") as? String == userFartList![cellIndexPath].fartSound {
+//            fartSelectedImage.hidden = false
+//            
+//        }
         
         if indexPath.section == 0 {
             
@@ -100,7 +108,15 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             return topCell
         } else if indexPath.section == 1 {
             
+            
+            
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
+            fartCell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+            if defaults.objectForKey("defaultFart") as? String == systemFartList[indexPath.row].fartSound {
+                fartCell.fartSelectedImage.hidden = false
+                
+            }
             
             fartCell.fartDescriptionn.attributedText = makeAttributedString(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
             
@@ -110,11 +126,17 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             fartCell.fartDescriptionn.numberOfLines = 0
             return fartCell
-        
-        
+            
+            
         } else {
-    
+            
             let fartCell = tableView.dequeueReusableCellWithIdentifier("FartCell", forIndexPath: indexPath) as! FartTableViewCell
+            fartCell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+            if defaults.objectForKey("defaultFart") as? String == userFartList![indexPath.row].fartSound {
+                fartCell.fartSelectedImage.hidden = false
+                
+            }
             
             fartCell.fartDescriptionn.attributedText = makeAttributedString(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
             
@@ -136,30 +158,53 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             return nil
         } else if section == 1 {
-        
+            
             let headerCell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("MenuHeader")
             return headerCell
         } else {
-
+            
             return nil
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-                
+        
+        let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
+        
         switch indexPath.section {
             
         case 0: break
             
         case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
+        fartCell.fartSelectedImage.hidden = false
             
         case 2: defaults.setObject(userFartList![indexPath.row].fartSound!, forKey: "defaultFart")
-
+        fartCell.fartSelectedImage.hidden = false
+            
+        default: break
+        }
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
+        
+        switch indexPath.section {
+            
+        case 0: break
+            
+        case 1: fartCell.fartSelectedImage.hidden = true
+            
+            
+        case 2: fartCell.fartSelectedImage.hidden = true
+            
+            
         default: break
         }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         if section == 0 {
             
             return 0
@@ -167,7 +212,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             return 50
         } else {
-        
+            
             return 0
         }
     }

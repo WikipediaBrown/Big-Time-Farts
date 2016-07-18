@@ -68,9 +68,8 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
 
         addSubview(fartDescriptionn)
         addSubview(fartSelectedImage)
+        fartSelectedImage.hidden = true
 
-        
-        
         let viewsDictionary = ["v0": fartPlayButton, "v1": fartDescriptionn, "v2": fartSelectedImage]
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0(40)]-[v1]-[v2(40)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v0(40)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
