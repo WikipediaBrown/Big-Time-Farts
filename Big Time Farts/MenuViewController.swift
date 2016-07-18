@@ -40,8 +40,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let dateFormatter = NSDateFormatter()
         let timeFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM dd"
-        timeFormatter.dateFormat = "H:m:s a"
+        dateFormatter.dateFormat = "EEEE, MMMM d"
+        timeFormatter.dateFormat = "h:m:ss a"
+        
         
         let today = NSDate()
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
@@ -169,16 +170,17 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         
         switch indexPath.section {
             
         case 0: break
             
         case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
+        let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         fartCell.fartSelectedImage.hidden = false
             
         case 2: defaults.setObject(userFartList![indexPath.row].fartSound!, forKey: "defaultFart")
+        let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
         fartCell.fartSelectedImage.hidden = false
             
         default: break

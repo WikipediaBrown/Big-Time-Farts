@@ -13,12 +13,6 @@ let initialFart = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("
 
 var defaults = NSUserDefaults.standardUserDefaults()
 
-
-
-//var chosenFart = defaults.objectForKey("defaultFart")
-
-    //NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test-fart", ofType: "mp3")!).absoluteString
-
 struct FartData {
     
     var sectionName: String
