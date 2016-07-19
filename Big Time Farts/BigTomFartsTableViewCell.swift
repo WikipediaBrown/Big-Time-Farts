@@ -121,11 +121,10 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         playRecordedFartButton.backgroundColor = .clearColor()
         playRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         playRecordedFartButton.setAttributedTitle(makeButtonTitle("Tap to Play"), forState: .Normal)
-//        playRecordedFartButton.setTitle("Tap to Play", forState: .Normal)
         playRecordedFartButton.layer.borderWidth = 2
         playRecordedFartButton.layer.borderColor = UIColor.whiteColor().CGColor
-        playRecordedFartButton.layer.cornerRadius = 17.5
-        playRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
+        playRecordedFartButton.layer.cornerRadius = 17
+        playRecordedFartButton.contentEdgeInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
         playRecordedFartButton.addTarget(self, action: #selector(playTapped), forControlEvents: .TouchUpInside)
         playSaveStackView.addArrangedSubview(playRecordedFartButton)
         
@@ -133,10 +132,10 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         saveRecordedFartButton.backgroundColor = .clearColor()
         saveRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         saveRecordedFartButton.setAttributedTitle(makeButtonTitle("Save Fart"), forState: .Normal)
-//        saveRecordedFartButton.setTitle("Save Fart", forState: .Normal)
         saveRecordedFartButton.layer.borderWidth = 2
         saveRecordedFartButton.layer.borderColor = UIColor.whiteColor().CGColor
-        saveRecordedFartButton.layer.cornerRadius = 17.5
+        saveRecordedFartButton.layer.cornerRadius = 17
+        saveRecordedFartButton.contentEdgeInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
         saveRecordedFartButton.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         saveRecordedFartButton.addTarget(self, action: #selector(saveTapped), forControlEvents: .TouchUpInside)
         playSaveStackView.addArrangedSubview(saveRecordedFartButton)

@@ -17,7 +17,8 @@ func makeButtonTitle(title: String) -> NSAttributedString {
     
     
     let titleAttributes = [
-        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1),
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline),
+        
     ]
     
     let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
@@ -25,6 +26,32 @@ func makeButtonTitle(title: String) -> NSAttributedString {
     
     return titleString
 }
+
+
+
+
+
+
+
+
+
+//class ResizableButton: UIButton {
+//    
+//    override func intrinsicContentSize() -> CGSize
+//    {
+//        let labelSize = titleLabel?.sizeThatFits(CGSizeMake(self.frame.size.width, self.frame.size.height)) ?? CGSizeZero
+//        let desiredButtonSize = CGSizeMake(labelSize.width + titleEdgeInsets.left + titleEdgeInsets.right, labelSize.height + titleEdgeInsets.top + titleEdgeInsets.bottom)
+//        
+//        return desiredButtonSize
+//    }
+//
+//
+//}
+
+
+
+
+
 
 
 
