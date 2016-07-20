@@ -22,6 +22,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         fartTable.setNeedsLayout()
         fartTable.layoutIfNeeded()
+        
         setupFartData()
         
         setupViews()
@@ -29,7 +30,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadFarts),name:"load", object: nil)
         
         
-        
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     let fartTable: UITableView = {
@@ -243,6 +247,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let navBar: UINavigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 64))
         navBar.translucent = false
         navBar.barTintColor = primaryColor
+        navBar.titleTextAttributes = [NSForegroundColorAttributeName: backColor]
         navBar.tintColor = secondaryColor
         self.view.addSubview(navBar)
         let navBarItem = UINavigationItem()

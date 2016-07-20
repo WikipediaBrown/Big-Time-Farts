@@ -133,16 +133,15 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         menu.setupViews()
         fartNameView.resignFirstResponder()
         
-        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: .CurveEaseIn, animations: {
-            self.containerView.center.y = -self.view.frame.size.height * 0.5
+        UIView.animateWithDuration(0.18, delay: 0.0, options: .CurveEaseIn, animations: {
             self.backgroundView.alpha = 0.0
+            self.containerView.center.y = -self.view.frame.size.height * 0.4
             }) { (true) in
-                self.dismissViewControllerAnimated(true) {
+                self.dismissViewControllerAnimated(false) {
                     
                 }
         }
 
-        
     }
     
     func cancelFartButtonTapped() {

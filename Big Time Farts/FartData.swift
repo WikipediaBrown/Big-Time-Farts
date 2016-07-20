@@ -21,11 +21,13 @@ func makeButtonTitle(title: String) -> NSAttributedString {
         NSForegroundColorAttributeName: primaryColor
     ]
     
-    let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
+    let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
     
     
     return titleString
 }
+
+
 
 
 
