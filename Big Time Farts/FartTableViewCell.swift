@@ -41,7 +41,6 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     let fartDescriptionn: UILabel = {
         
         let label = UILabel()
-        label.backgroundColor = .greenColor()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -69,6 +68,8 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         addSubview(fartDescriptionn)
         addSubview(fartSelectedImage)
         fartSelectedImage.hidden = true
+        
+        backgroundColor = backColor
 
         let viewsDictionary = ["v0": fartPlayButton, "v1": fartDescriptionn, "v2": fartSelectedImage]
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0(40)]-[v1]-[v2(40)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))

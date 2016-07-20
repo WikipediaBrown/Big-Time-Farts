@@ -21,13 +21,23 @@ class MenuHeaderSection: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    let containerView: UIView = {
+    
+        let view = UIView()
+        view.layer.borderWidth = 2
+        view.layer.borderColor = primaryColor.CGColor
+        view.backgroundColor = secondaryColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     let collectionHeader: UILabel = {
         var noteCount = UILabel()
         noteCount.text = "Select a fart from the Fart Locker"
         noteCount.textAlignment = .Center
-        noteCount.font = UIFont.boldSystemFontOfSize(14)
-        noteCount.textColor = UIColor.blueColor()
+        noteCount.textColor = secondaryColor
+        noteCount.backgroundColor = primaryColor
         noteCount.translatesAutoresizingMaskIntoConstraints = false
         return noteCount
         
@@ -36,9 +46,14 @@ class MenuHeaderSection: UITableViewHeaderFooterView {
     
     func setupViews() {
         
-        addSubview(collectionHeader)
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-16-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": collectionHeader]))
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": collectionHeader]))
+        addSubview(containerView)
+        containerView.addSubview(collectionHeader)
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-3-[v0]-3-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": collectionHeader]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-3-[v0]-3-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": collectionHeader]))
+        
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": containerView]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": containerView]))
     }
 
 }

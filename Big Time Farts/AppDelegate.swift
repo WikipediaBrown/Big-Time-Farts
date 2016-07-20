@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultFartHolder = ["defaultFart": initialFart]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(defaultFartHolder)
-
+        
         return true
     }
 

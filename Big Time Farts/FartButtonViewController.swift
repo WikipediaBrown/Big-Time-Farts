@@ -10,13 +10,18 @@ import UIKit
 import AVFoundation
 
 class FartButtonViewController: UIViewController {
+    
+    var viewWidth: CGFloat!
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.view.backgroundColor = .whiteColor()
+        self.view.backgroundColor = backColor
+        viewWidth = self.view.frame.width
+
         setupButton()
     }
+    
 
 
     let fartButton: UIButton = {
@@ -32,7 +37,10 @@ class FartButtonViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 17
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.blackColor().CGColor
+        button.layer.borderColor = primaryColor.CGColor
+        button.backgroundColor = secondaryColor
+        button.titleLabel?.text = "MENU"
+        button.titleLabel?.tintColor = primaryColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -55,9 +63,9 @@ class FartButtonViewController: UIViewController {
         try? fartRecordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
 
         let viewsDictionary = ["v0": fartButton, "v1": menuButton]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[v1]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[v0]-20-[v1(100)]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v0(\(viewWidth))]-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
     
     func playFart() {

@@ -18,7 +18,7 @@ func makeButtonTitle(title: String) -> NSAttributedString {
     
     let titleAttributes = [
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline),
-        
+        NSForegroundColorAttributeName: primaryColor
     ]
     
     let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
@@ -29,30 +29,11 @@ func makeButtonTitle(title: String) -> NSAttributedString {
 
 
 
+let primaryColor = UIColor(colorLiteralRed: 38.0/255.0, green: 37.0/255.0, blue: 64.0/255.0, alpha: 1.0)
 
+let secondaryColor = UIColor(colorLiteralRed: 242/255.0, green: 99/255.0, blue: 95/255.0, alpha: 1.0)
 
-
-
-
-
-//class ResizableButton: UIButton {
-//    
-//    override func intrinsicContentSize() -> CGSize
-//    {
-//        let labelSize = titleLabel?.sizeThatFits(CGSizeMake(self.frame.size.width, self.frame.size.height)) ?? CGSizeZero
-//        let desiredButtonSize = CGSizeMake(labelSize.width + titleEdgeInsets.left + titleEdgeInsets.right, labelSize.height + titleEdgeInsets.top + titleEdgeInsets.bottom)
-//        
-//        return desiredButtonSize
-//    }
-//
-//
-//}
-
-
-
-
-
-
+let backColor = UIColor(colorLiteralRed: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.8)
 
 
 

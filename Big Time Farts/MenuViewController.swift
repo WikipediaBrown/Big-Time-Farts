@@ -15,7 +15,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.purpleColor()
+        view.backgroundColor = backColor
         
         //fartTable.estimatedRowHeight = 50
         //fartTable.rowHeight = UITableViewAutomaticDimension
@@ -25,6 +25,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupFartData()
         
         setupViews()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadFarts),name:"load", object: nil)
         
         
@@ -38,7 +39,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         return table
     }()
     
-    func makeAttributedString(title title: String, subtitle: String, date: NSDate) -> NSAttributedString {
+    func makeFartLabel(title title: String, subtitle: String, date: NSDate) -> NSAttributedString {
         
         let dateFormatter = NSDateFormatter()
         let timeFormatter = NSDateFormatter()
@@ -64,12 +65,12 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let titleAttributes = [
             NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline),
-            NSForegroundColorAttributeName: UIColor.blueColor()
+            NSForegroundColorAttributeName: primaryColor
         ]
         
         let subtitleAttributes = [
             NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline),
-            NSForegroundColorAttributeName: UIColor.redColor()
+            NSForegroundColorAttributeName: secondaryColor
         ]
         
         let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
@@ -112,7 +113,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                 selectedFart = indexPath
             }
             
-            fartCell.fartDescriptionn.attributedText = makeAttributedString(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
+            fartCell.fartDescriptionn.attributedText = makeFartLabel(title: systemFartList[indexPath.row].title, subtitle: systemFartList[indexPath.row].subtitle, date: systemFartList[indexPath.row].date)
             
             fartCell.cellIndexPath = indexPath.row
             
@@ -133,7 +134,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                 selectedFart = indexPath
             }
             
-            fartCell.fartDescriptionn.attributedText = makeAttributedString(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
+            fartCell.fartDescriptionn.attributedText = makeFartLabel(title: userFartList![indexPath.row].title!, subtitle: userFartList![indexPath.row].subtitle!, date: userFartList![indexPath.row].date!)
             
             fartCell.cellIndexPath = indexPath.row
             
@@ -240,11 +241,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setupViews() {
         
         let navBar: UINavigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 64))
+        navBar.translucent = false
+        navBar.barTintColor = primaryColor
+        navBar.tintColor = secondaryColor
         self.view.addSubview(navBar)
         let navBarItem = UINavigationItem()
         navBar.items = [navBarItem]
         
-        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(self.dismissMenu))
+        navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(self.dismissMenu))
         
         self.view.addSubview(fartTable)
         fartTable.delegate = self
