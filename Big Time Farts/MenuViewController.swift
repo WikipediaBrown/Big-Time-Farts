@@ -246,6 +246,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         navBar.tintColor = secondaryColor
         self.view.addSubview(navBar)
         let navBarItem = UINavigationItem()
+        navBarItem.title = "Menu"
         navBar.items = [navBarItem]
         
         navBarItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(self.dismissMenu))
@@ -276,7 +277,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let dimmer = DimmingViewController()
         dimmer.modalPresentationStyle = .Custom
         dimmer.modalTransitionStyle = .CrossDissolve
-        presentViewController(dimmer, animated: true, completion: nil)
+        presentViewController(dimmer, animated: false, completion: nil)
         
     }
     

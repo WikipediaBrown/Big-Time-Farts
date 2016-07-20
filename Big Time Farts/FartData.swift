@@ -29,9 +29,9 @@ func makeButtonTitle(title: String) -> NSAttributedString {
 
 
 
-let primaryColor = UIColor(colorLiteralRed: 38.0/255.0, green: 37.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+let primaryColor = UIColor(colorLiteralRed: 40.0/255.0, green: 43.0/255.0, blue: 53.0/255.0, alpha: 1.0)
 
-let secondaryColor = UIColor(colorLiteralRed: 242/255.0, green: 99/255.0, blue: 95/255.0, alpha: 1.0)
+let secondaryColor = UIColor(colorLiteralRed: 222/255.0, green: 67/255.0, blue: 72/255.0, alpha: 1.0)
 
 let backColor = UIColor(colorLiteralRed: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.8)
 

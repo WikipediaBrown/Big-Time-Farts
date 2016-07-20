@@ -27,6 +27,8 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var backgroundView: UIView!
     
+    var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clearColor()
@@ -35,29 +37,37 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3, options: .CurveEaseIn, animations: {
-            self.editStackView.frame = CGRect(x: (self.view.frame.width/2) - 125, y: (self.view.frame.height/2) - 200, width: 250, height: 300)
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: .CurveEaseOut, animations: {
+            
+            self.containerView.center.y = self.view.frame.size.height * 0.3
+            self.backgroundView.alpha = 0.6
+            
             }, completion: nil)
     }
-    
+        
     func setupViews() {
+        
+        containerView = UIView(frame: CGRect(x: view.frame.size.width * 0.1, y: -view.frame.size.height * 0.5, width: view.frame.size.width * 0.8, height: view.frame.size.height * 0.4))
+        containerView.backgroundColor = .redColor()
         
         backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.blackColor()
-        backgroundView.alpha = 0.7
+        backgroundView.alpha = 0.0
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         let outterTap = UITapGestureRecognizer(target: self, action: #selector(dismissFartSave))
         outterTap.delegate = self
         backgroundView.addGestureRecognizer(outterTap)
         self.view.addSubview(backgroundView)
-        
+        self.view.addSubview(containerView)
+
         editStackView = UIStackView()
         editStackView.spacing = 0
         editStackView.translatesAutoresizingMaskIntoConstraints = false
         editStackView.alignment = .Fill
         editStackView.distribution = .FillEqually
         editStackView.axis = .Vertical
-        self.view.addSubview(editStackView)
+        containerView.addSubview(editStackView)
         
         mainViewHeader = UILabel(frame:CGRectMake(0, 0, view.frame.width, view.frame.height))
         mainViewHeader.text = "Save Your Big Time Fart"
@@ -109,8 +119,8 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         let viewsDictionary = ["v0": backgroundView, "v1": editStackView]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-40-[v1]-40-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-100-[v1]-300-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         
         
         
@@ -121,14 +131,17 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let menu = MenuViewController()
         menu.setupViews()
+        fartNameView.resignFirstResponder()
         
-        UIView.animateWithDuration(3.0, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.3, options: .CurveEaseIn, animations: {
-            self.editStackView.frame = CGRect(x: (self.view.frame.width/2) - 125, y: -300, width: 250, height: 300)
-            }, completion: nil)
-        
-        self.dismissViewControllerAnimated(true) {
-            
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: .CurveEaseIn, animations: {
+            self.containerView.center.y = -self.view.frame.size.height * 0.5
+            self.backgroundView.alpha = 0.0
+            }) { (true) in
+                self.dismissViewControllerAnimated(true) {
+                    
+                }
         }
+
         
     }
     
