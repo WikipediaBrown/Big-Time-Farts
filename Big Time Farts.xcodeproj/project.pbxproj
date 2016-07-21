@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		7B2356E01D1C8A1B004714A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */; };
 		7B2356E21D1C8A1B004714A1 /* FartButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */; };
-		7B2356E71D1C8A1B004714A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E61D1C8A1B004714A1 /* Assets.xcassets */; };
 		7B2356EA1D1C8A1B004714A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */; };
 		7B2356F21D1CC85E004714A1 /* test-fart.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7B2356F11D1CC85E004714A1 /* test-fart.mp3 */; };
 		7BD782B01D29995F000E6890 /* Fart+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD782AE1D29995F000E6890 /* Fart+CoreDataProperties.swift */; };
 		7BD782B11D29995F000E6890 /* Fart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD782AF1D29995F000E6890 /* Fart.swift */; };
+		7BDE75491D40806A00B5137E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BDE75481D40806A00B5137E /* Assets.xcassets */; };
 		7BEEB6411D1E2D3E00B96281 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */; };
 		7BEEB6431D1E875B00B96281 /* FartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6421D1E875B00B96281 /* FartData.swift */; };
 		7BEEB6451D1E8B6900B96281 /* FartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */; };
@@ -29,12 +29,12 @@
 		7B2356DC1D1C8A1B004714A1 /* Big Time Farts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Big Time Farts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2356DF1D1C8A1B004714A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B2356E11D1C8A1B004714A1 /* FartButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartButtonViewController.swift; sourceTree = "<group>"; };
-		7B2356E61D1C8A1B004714A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B2356E91D1C8A1B004714A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B2356EB1D1C8A1B004714A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B2356F11D1CC85E004714A1 /* test-fart.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "test-fart.mp3"; sourceTree = "<group>"; };
 		7BD782AE1D29995F000E6890 /* Fart+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fart+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7BD782AF1D29995F000E6890 /* Fart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fart.swift; sourceTree = "<group>"; };
+		7BDE75481D40806A00B5137E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BEEB6401D1E2D3E00B96281 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7BEEB6421D1E875B00B96281 /* FartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartData.swift; sourceTree = "<group>"; };
 		7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FartTableViewCell.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 				7BEEB6461D1EAFD000B96281 /* BigTomFartsTableViewCell.swift */,
 				7BEEB6481D1EB1E100B96281 /* MenuHeaderSection.swift */,
 				7BEEB6441D1E8B6900B96281 /* FartTableViewCell.swift */,
-				7B2356E61D1C8A1B004714A1 /* Assets.xcassets */,
+				7BDE75481D40806A00B5137E /* Assets.xcassets */,
 				7B2356E81D1C8A1B004714A1 /* LaunchScreen.storyboard */,
 				7B2356EB1D1C8A1B004714A1 /* Info.plist */,
 				7BEEB64C1D1F6BF000B96281 /* test-2.mp3 */,
@@ -158,9 +158,9 @@
 			files = (
 				7BEEB64F1D2050FA00B96281 /* .gitignore in Resources */,
 				7B2356EA1D1C8A1B004714A1 /* LaunchScreen.storyboard in Resources */,
-				7B2356E71D1C8A1B004714A1 /* Assets.xcassets in Resources */,
 				7B2356F21D1CC85E004714A1 /* test-fart.mp3 in Resources */,
 				7BEEB64D1D1F6BF000B96281 /* test-2.mp3 in Resources */,
+				7BDE75491D40806A00B5137E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

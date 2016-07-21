@@ -34,6 +34,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         logo.image = UIImage(named: "heart-full")
         logo.contentMode = UIViewContentMode.ScaleAspectFit
         logo.clipsToBounds = true
+        logo.userInteractionEnabled = true
         logo.translatesAutoresizingMaskIntoConstraints = false
         return logo
     }()
@@ -86,7 +87,10 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         stackView.alignment = UIStackViewAlignment.Center
         stackView.axis = .Vertical
         addSubview(stackView)
-                addSubview(bigTimeFartsLogo)
+
+        addSubview(bigTimeFartsLogo)
+        let tapped = UITapGestureRecognizer(target: self, action: #selector(logoTapped))
+        bigTimeFartsLogo.addGestureRecognizer(tapped)
 
         
         backgroundColor = backColor
@@ -123,7 +127,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         
         
         playRecordedFartButton = UIButton()
-        playRecordedFartButton.backgroundColor = .clearColor()
+        playRecordedFartButton.backgroundColor = primaryColor
         playRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         playRecordedFartButton.setAttributedTitle(makeButtonTitle("Tap to Play"), forState: .Normal)
         playRecordedFartButton.layer.borderWidth = 2
@@ -134,7 +138,7 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         playSaveStackView.addArrangedSubview(playRecordedFartButton)
         
         saveRecordedFartButton = UIButton()
-        saveRecordedFartButton.backgroundColor = .clearColor()
+        saveRecordedFartButton.backgroundColor = primaryColor
         saveRecordedFartButton.translatesAutoresizingMaskIntoConstraints = false
         saveRecordedFartButton.setAttributedTitle(makeButtonTitle("Save Fart"), forState: .Normal)
         saveRecordedFartButton.layer.borderWidth = 2
@@ -275,6 +279,18 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         if !flag {
             finishRecording(success: false)
+        }
+    }
+    
+    func logoTapped() {
+        
+        do {
+            
+            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: defaults.objectForKey("defaultFart") as! String)!)
+            self.fartPlayer.play()
+        } catch {
+            
+            print("Error getting the fart file: \(error)")
         }
     }
     

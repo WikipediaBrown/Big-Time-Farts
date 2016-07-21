@@ -33,7 +33,7 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     let fartPlayButton: UIButton = {
     
         let button = UIButton()
-        button.backgroundColor = .blueColor()
+        button.setImage(UIImage(named: "play-button"), forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -41,6 +41,7 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     let fartDescriptionn: UILabel = {
         
         let label = UILabel()
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -48,7 +49,7 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     let fartSelectedImage: UIImageView = {
         
         let imageView = UIImageView()
-        imageView.backgroundColor = .redColor()
+        imageView.image = UIImage(named: "heart-full")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -70,7 +71,7 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
         fartSelectedImage.hidden = true
         
         backgroundColor = backColor
-
+        
         let viewsDictionary = ["v0": fartPlayButton, "v1": fartDescriptionn, "v2": fartSelectedImage]
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0(40)]-[v1]-[v2(40)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v0(40)]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
@@ -88,11 +89,13 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
             do {
                 
                 self.cellFartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: systemFartList[cellIndexPath].fartSound)!)
-                self.cellFartPlayer.play()
             } catch {
                 
                 print("Error getting the fart file: \(error)")
             }
+            
+            self.cellFartPlayer.play()
+
         } else if cellSection == 2 {
         
             do {

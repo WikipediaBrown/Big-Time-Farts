@@ -21,10 +21,23 @@ class FartButtonViewController: UIViewController {
         setupButton()
     }
     
+//    let fartButton: UIImageView = {
+//        
+//        let button = UIImageView()
+//        button.image = UIImage(named: "heart-full")
+//        button.contentMode = UIViewContentMode.ScaleAspectFit
+//        button.backgroundColor = .redColor()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    
     let fartButton: UIButton = {
         
         let button = UIButton()
-        button.setImage(UIImage(named: "heart-full"), forState: .Normal)
+//        button.setImage(UIImage(named: "heart-full"), forState: .Normal)
+        button.setBackgroundImage(UIImage(named: "heart-full"), forState: .Normal)
+        button.contentMode = UIViewContentMode.ScaleAspectFit
+        button.backgroundColor = .redColor()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -33,11 +46,10 @@ class FartButtonViewController: UIViewController {
         
         let button = UIButton()
         button.layer.cornerRadius = 17
-        button.layer.borderWidth = 1
-        button.layer.borderColor = primaryColor.CGColor
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .Center
         button.backgroundColor = secondaryColor
-        button.titleLabel?.text = "MENU"
-        button.titleLabel?.tintColor = primaryColor
+        button.setAttributedTitle(makeMenuButton("Big Tom Farts\nmenu"), forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -50,14 +62,10 @@ class FartButtonViewController: UIViewController {
     
     func setupButton() {
         let socialButtonStackView = UIStackView()
-        let buttonStackView = UIStackView()
-        let mainStackView = UIStackView()
-
-        
         let facebookButton: UIButton = {
             
-            let button = UIButton()
-            button.layer.cornerRadius = socialButtonStackView.frame.size.height/20
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.height/10, height: self.view.frame.height/10))
+            button.layer.cornerRadius = (self.view.frame.width)/20
             button.backgroundColor = .redColor()
             return button
         }()
@@ -75,37 +83,36 @@ class FartButtonViewController: UIViewController {
         socialButtonStackView.distribution = .FillEqually
         socialButtonStackView.addArrangedSubview(facebookButton)
         socialButtonStackView.addArrangedSubview(twitterButton)
+        socialButtonStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        buttonStackView.axis = .Vertical
-        buttonStackView.spacing = 10
-        buttonStackView.distribution = .FillEqually
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-        buttonStackView.addArrangedSubview(socialButtonStackView)
-        buttonStackView.addArrangedSubview(menuButton)
         
-        mainStackView.alignment = .Center
-        mainStackView.axis = .Vertical
-        mainStackView.distribution = .FillEqually
-        mainStackView.addArrangedSubview(fartButton)
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        mainStackView.addArrangedSubview(buttonStackView)
-        self.view.addSubview(mainStackView)
         
-        fartButton.addTarget(self, action: #selector(FartButtonViewController.playFart), forControlEvents: .TouchUpInside)
+        self.view.addSubview(fartButton)
+        
+        self.view.addSubview(menuButton)
+
+        self.view.addSubview(socialButtonStackView)
+
+        
+//        fartButton.addTarget(self, action: #selector(FartButtonViewController.playFart), forControlEvents: .TouchUpInside)
         menuButton.addTarget(self, action: #selector(FartButtonViewController.showMenu), forControlEvents: .TouchUpInside)
         
         _ = try? fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
         _ = try? fartRecordingSession.setActive(true)
         _ = try? fartRecordingSession.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
         
-        let viewsDictionary = ["v0": mainStackView, "v1": buttonStackView, "v2": socialButtonStackView]
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v0]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        let viewsDictionary = ["v0": fartButton, "v1": socialButtonStackView, "v2": menuButton]
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[v0]-20-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-\(statusBarHeight)-[v0]-[v1]-[v2]-16-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+
+        
+                self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v1]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[v2]-|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        
+
     }
     
     func playFart() {

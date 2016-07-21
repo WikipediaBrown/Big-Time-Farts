@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-
+let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
 
 
 func makeButtonTitle(title: String) -> NSAttributedString {
@@ -18,7 +18,35 @@ func makeButtonTitle(title: String) -> NSAttributedString {
     
     let titleAttributes = [
         NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline),
-        NSForegroundColorAttributeName: primaryColor
+        NSForegroundColorAttributeName: backColor
+    ]
+    
+    let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
+    
+    
+    return titleString
+}
+
+func makeMenuButton(title: String) -> NSAttributedString {
+    
+    
+    let titleAttributes = [
+        NSFontAttributeName: UIFont.boldSystemFontOfSize(45),
+        NSForegroundColorAttributeName: backColor
+    ]
+    
+    let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
+    
+    
+    return titleString
+}
+
+func makeEditMenu(title: String) -> NSAttributedString {
+    
+    
+    let titleAttributes = [
+        NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1),
+        NSForegroundColorAttributeName: backColor
     ]
     
     let titleString = NSMutableAttributedString(string: "\(title)", attributes: titleAttributes)
@@ -29,11 +57,9 @@ func makeButtonTitle(title: String) -> NSAttributedString {
 
 
 
+let primaryColor = UIColor(colorLiteralRed: 27.0/255.0, green: 30.0/255.0, blue: 37.0/255.0, alpha: 1.0)
 
-
-let primaryColor = UIColor(colorLiteralRed: 40.0/255.0, green: 43.0/255.0, blue: 53.0/255.0, alpha: 1.0)
-
-let secondaryColor = UIColor(colorLiteralRed: 222/255.0, green: 67/255.0, blue: 72/255.0, alpha: 1.0)
+let secondaryColor = UIColor(colorLiteralRed: 230.0/255.0, green: 67.0/255.0, blue: 64.0/255.0, alpha: 1.0)
 
 let backColor = UIColor(colorLiteralRed: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.8)
 

@@ -32,6 +32,51 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {}
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let swipeShare = UITableViewRowAction(style: .Normal, title: "Share") { (action: UITableViewRowAction, indexPath: NSIndexPath) in
+            
+//            let noteToShare = notes![indexPath.row].note
+//            let activityViewController = UIActivityViewController(activityItems: [noteToShare], applicationActivities: nil)
+//            self.presentViewController(activityViewController, animated: true, completion: nil)
+            
+            print(userFartList![indexPath.row].fartSound)
+        }
+        let swipeDelete = UITableViewRowAction(style: .Default, title: "Delete") { (action: UITableViewRowAction, indexPath: NSIndexPath) in
+            
+            let fartToDelete = userFartList![indexPath.row]
+            userFartList?.removeAtIndex(indexPath.row)
+            let context = delegate?.managedObjectContext
+            context?.deleteObject(fartToDelete)
+            
+            do{
+                try delegate?.managedObjectContext.save()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            catch let error{
+                print("Could not save Deletion \(error)")
+            }
+            
+        }
+        
+        let section = indexPath.section
+        
+        switch section {
+        case 0:
+            return [swipeShare]
+
+        case 1:
+            return [swipeShare]
+
+        case 2:
+            return [swipeDelete, swipeShare]
+        default:
+            return [swipeDelete, swipeShare]
+        }
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
@@ -51,10 +96,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         timeFormatter.dateFormat = "h:m:ss a"
         
         
-        let today = NSDate()
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let todayAtMidnight = calendar?.startOfDayForDate(today)
-        print(todayAtMidnight)
+//        let today = NSDate()
+//        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+//        let todayAtMidnight = calendar?.startOfDayForDate(today)
+//        print(todayAtMidnight)
         
         
         
@@ -73,7 +118,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         ]
         
         let subtitleAttributes = [
-            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline),
+            NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote),
             NSForegroundColorAttributeName: secondaryColor
         ]
         
@@ -167,6 +212,16 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if indexPath.section == 0 {
+        
+            return nil
+        } else {
+        
+            return indexPath
+        }
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
@@ -177,10 +232,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 1: defaults.setObject(systemFartList[indexPath.row].fartSound, forKey: "defaultFart")
         
         if selectedFart != nil {
-        
-        let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
-        oldFartCell.fartSelectedImage.hidden = true
-        
+            
+            let oldFartCell = tableView.cellForRowAtIndexPath(selectedFart) as! FartTableViewCell
+            oldFartCell.fartSelectedImage.hidden = true
+            
         }
         
         let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
@@ -204,19 +259,22 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
-        
-        switch indexPath.section {
+        if indexPath.section != 0 {
             
-        case 0: break
+            let fartCell = tableView.cellForRowAtIndexPath(indexPath) as! FartTableViewCell
             
-        case 1: fartCell.fartSelectedImage.hidden = true
-            
-            
-        case 2: fartCell.fartSelectedImage.hidden = true
-            
-            
-        default: break
+            switch indexPath.section {
+                
+            case 0: break
+                
+            case 1: fartCell.fartSelectedImage.hidden = true
+                
+                
+            case 2: fartCell.fartSelectedImage.hidden = true
+                
+                
+            default: break
+            }
         }
     }
     

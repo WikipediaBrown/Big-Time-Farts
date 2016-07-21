@@ -29,6 +29,8 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var containerView: UIView!
     
+    var viewWidth: CGFloat!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.clearColor()
@@ -48,8 +50,14 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         
     func setupViews() {
         
-        containerView = UIView(frame: CGRect(x: view.frame.size.width * 0.1, y: -view.frame.size.height * 0.5, width: view.frame.size.width * 0.8, height: view.frame.size.height * 0.4))
-        containerView.backgroundColor = .redColor()
+        viewWidth = view.frame.size.width
+        
+        containerView = UIView(frame: CGRect(x: viewWidth * 0.1, y: -view.frame.size.height * 0.5, width: view.frame.size.width * 0.8, height: view.frame.size.height * 0.4))
+        containerView.backgroundColor = primaryColor
+        containerView.layer.borderWidth = 2
+        containerView.layer.borderColor = secondaryColor.CGColor
+        containerView.layer.cornerRadius = viewWidth/25
+        
         
         backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.blackColor()
@@ -70,47 +78,47 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
         containerView.addSubview(editStackView)
         
         mainViewHeader = UILabel(frame:CGRectMake(0, 0, view.frame.width, view.frame.height))
-        mainViewHeader.text = "Save Your Big Time Fart"
+        mainViewHeader.attributedText = makeButtonTitle("Save Your Big Time Fart")
         mainViewHeader.textAlignment = .Center
-        mainViewHeader.backgroundColor = UIColor.whiteColor()
+        mainViewHeader.backgroundColor = .clearColor()
         editStackView.addArrangedSubview(mainViewHeader)
         
         mainView = UILabel()
-        mainView.text = "Enter the name of your fart below."
+        mainView.attributedText = makeEditMenu("Enter the name of your fart below.")
         mainView.textAlignment = .Center
-        mainView.backgroundColor = UIColor.whiteColor()
+        mainView.backgroundColor = .clearColor()
         editStackView.addArrangedSubview(mainView)
         
         fartNameView = UITextField()
-        fartNameView.backgroundColor = UIColor.whiteColor()
+        fartNameView.backgroundColor = .clearColor()
+        fartNameView.textColor = backColor
+        fartNameView.tintColor = secondaryColor
+        fartNameView.attributedPlaceholder = makeButtonTitle("What's your fart's name?")
         fartNameView.becomeFirstResponder()
         editStackView.addArrangedSubview(fartNameView)
         
         let paddingView = UIView(frame:CGRectMake(0, 0, 30, 30))
         fartNameView.leftView = paddingView
         fartNameView.leftViewMode = UITextFieldViewMode.Always
-        fartNameView.placeholder="What's your fart's name?"
+//        fartNameView.placeholder="What's your fart's name?"
         
         buttonStackView = UIStackView()
-        buttonStackView.spacing = 0
+        buttonStackView.spacing = 5
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.distribution = .FillEqually
         buttonStackView.axis = .Horizontal
         editStackView.addArrangedSubview(buttonStackView)
         
         cancelButton = UIButton()
-        cancelButton.setTitle("Cancel", forState: .Normal)
-        cancelButton.backgroundColor = UIColor.whiteColor()
-        cancelButton.layer.borderWidth = 2
-        cancelButton.layer.borderColor = UIColor.blueColor().CGColor
-        cancelButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
-        cancelButton.setTitleColor(UIColor.redColor(), forState: .Highlighted)
+        cancelButton.setAttributedTitle(makeButtonTitle("Cancel"), forState: .Normal)
+        cancelButton.backgroundColor = secondaryColor
+        cancelButton.setTitleColor(secondaryColor, forState: .Highlighted)
         cancelButton.addTarget(self, action: #selector(cancelFartButtonTapped), forControlEvents: .TouchUpInside)
         buttonStackView.addArrangedSubview(cancelButton)
         
         saveButton = UIButton()
-        saveButton.setTitle("Save", forState: .Normal)
-        saveButton.backgroundColor = UIColor.whiteColor()
+        saveButton.setAttributedTitle(makeButtonTitle("Save"), forState: .Normal)
+        saveButton.backgroundColor = secondaryColor
         saveButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         saveButton.setTitleColor(UIColor.greenColor(), forState: .Highlighted)
         saveButton.addTarget(self, action: #selector(saveFartButtonTapped), forControlEvents: .TouchUpInside)
