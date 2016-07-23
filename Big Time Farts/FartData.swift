@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
 let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
 
@@ -88,36 +89,29 @@ let secondFart = FartData(sectionName: "fartSelect", title: "second-fart", subti
 let systemFartList = [firstFart,secondFart]
 var userFartList: [Fart]?
 
-let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-
-
 extension MenuViewController {
     func setupFartData() {
         
-        if let context = delegate?.managedObjectContext {
-            
+        
             loadFartData()
             do {
-                try context.save()
+                try delegate.managedObjectContext.save()
             } catch {
                 print(error)
             }
-        }
         
     }
     
     func loadFartData() {
         
-        if let context = delegate?.managedObjectContext {
-            
+        
             let fetchFartRequest = NSFetchRequest(entityName: "Fart")
             
             do {
-                userFartList = try context.executeFetchRequest(fetchFartRequest) as? [Fart]
+                userFartList = try delegate.managedObjectContext.executeFetchRequest(fetchFartRequest) as? [Fart]
             } catch {
                 print(error)
             }
-        }
         
     }
     

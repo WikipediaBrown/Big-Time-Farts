@@ -171,7 +171,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
             let count = files!.count
             print (count)
             
-            let context = delegate?.managedObjectContext
+            let context = delegate.managedObjectContext
             
             do {
                 let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
@@ -179,7 +179,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
                 let destinationPath = documentDirectory.URLByAppendingPathComponent("/\(fartName)-\(count)-userAdded.m4A")
                 try NSFileManager.defaultManager().moveItemAtURL(originPath, toURL: destinationPath)
                 
-                let newFart = NSEntityDescription.insertNewObjectForEntityForName("Fart", inManagedObjectContext: context!) as! Fart
+                let newFart = NSEntityDescription.insertNewObjectForEntityForName("Fart", inManagedObjectContext: context) as! Fart
                 newFart.sectionName = "fartSelect"
                 newFart.title = fartName
                 newFart.subtitle = ""
@@ -187,7 +187,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
                 newFart.date = NSDate()
                 
                 userFartList?.append(newFart)
-                try context!.save()
+                try context.save()
 
             } catch let error as NSError {
                 print(error.localizedDescription)

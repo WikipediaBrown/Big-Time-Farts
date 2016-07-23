@@ -7,13 +7,33 @@
 //
 
 import UIKit
+import CoreData
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var selectedFart: NSIndexPath!
     
+    let fetchedFartResultsController: NSFetchedResultsController = {
+    
+        let fetchRequest = NSFetchRequest(entityName: "Fart")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        let context = delegate.managedObjectContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return frc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+        
+            try fetchedFartResultsController.performFetch()
+            print(fetchedFartResultsController.sections?[0].numberOfObjects)
+        } catch {
+        
+            print("nigga you're wrong")
+
+        }
         
         view.backgroundColor = backColor
         
@@ -48,11 +68,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let fartToDelete = userFartList![indexPath.row]
             userFartList?.removeAtIndex(indexPath.row)
-            let context = delegate?.managedObjectContext
-            context?.deleteObject(fartToDelete)
+            let context = delegate.managedObjectContext
+            context.deleteObject(fartToDelete)
             
             do{
-                try delegate?.managedObjectContext.save()
+                try delegate.managedObjectContext.save()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
             catch let error{
