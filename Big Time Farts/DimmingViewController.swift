@@ -183,7 +183,7 @@ class DimmingViewController: UIViewController, UIGestureRecognizerDelegate {
                 newFart.sectionName = "fartSelect"
                 newFart.title = fartName
                 newFart.subtitle = ""
-                newFart.fartSound = destinationPath.absoluteString
+                newFart.fartSound = "/\(fartName)-\(count)-userAdded.m4A"
                 newFart.date = NSDate()
                 
                 userFartList?.append(newFart)

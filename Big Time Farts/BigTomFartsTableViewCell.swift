@@ -284,11 +284,25 @@ class BigTomFartsTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
     
     func logoTapped() {
         
+        
+        
+        let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+        let originPath = documentDirectory.URLByAppendingPathComponent(defaults.objectForKey("defaultFart") as! String).absoluteString
+        
         do {
             
-            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: defaults.objectForKey("defaultFart") as! String)!)
+            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: originPath)!)
             self.fartPlayer.play()
         } catch {
+            
+                    do {
+            
+                        self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: defaults.objectForKey("defaultFart") as! String)!)
+                        self.fartPlayer.play()
+                    } catch {
+            
+                        print("Error getting the fart file: \(error)")
+                    }
             
             print("Error getting the fart file: \(error)")
         }

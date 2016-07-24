@@ -94,7 +94,7 @@ class FartButtonViewController: UIViewController {
         self.view.addSubview(socialButtonStackView)
 
         
-//        fartButton.addTarget(self, action: #selector(FartButtonViewController.playFart), forControlEvents: .TouchUpInside)
+        fartButton.addTarget(self, action: #selector(FartButtonViewController.playFart), forControlEvents: .TouchUpInside)
         menuButton.addTarget(self, action: #selector(FartButtonViewController.showMenu), forControlEvents: .TouchUpInside)
         
         _ = try? fartRecordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
@@ -117,11 +117,23 @@ class FartButtonViewController: UIViewController {
     
     func playFart() {
         
+        let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+        let originPath = documentDirectory.URLByAppendingPathComponent(defaults.objectForKey("defaultFart") as! String).absoluteString
+        
         do {
             
-            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: defaults.objectForKey("defaultFart") as! String)!)
+            self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: originPath)!)
             self.fartPlayer.play()
         } catch {
+            
+            do {
+                
+                self.fartPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: defaults.objectForKey("defaultFart") as! String)!)
+                self.fartPlayer.play()
+            } catch {
+                
+                print("Error getting the fart file: \(error)")
+            }
             
             print("Error getting the fart file: \(error)")
         }
