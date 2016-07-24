@@ -98,6 +98,8 @@ class FartTableViewCell: UITableViewCell, AVAudioRecorderDelegate {
 
         } else if cellSection == 2 {
             
+            
+            
             let documentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
             let originPath = documentDirectory.URLByAppendingPathComponent(userFartList![cellIndexPath].fartSound!).absoluteString
         
