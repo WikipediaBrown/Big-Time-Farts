@@ -9,21 +9,23 @@
 import UIKit
 import CoreData
 
-class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+let fetchedFartResultsController: NSFetchedResultsController = {
+    
+    let fetchRequest = NSFetchRequest(entityName: "Fart")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+    let context = delegate.managedObjectContext
+    let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    
+    return frc
+}()
+
+class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     var selectedFart: NSIndexPath!
     
-    let fetchedFartResultsController: NSFetchedResultsController = {
-    
-        let fetchRequest = NSFetchRequest(entityName: "Fart")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        let context = delegate.managedObjectContext
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        return frc
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchedFartResultsController.delegate = self
         
         do {
         
@@ -50,6 +52,16 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadFarts),name:"load", object: nil)
         
         
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        if type == .Insert {
+            
+            let fartIndexPath = NSIndexPath(forRow: newIndexPath!.row, inSection: 2)
+        
+            fartTable.insertRowsAtIndexPaths([fartIndexPath], withRowAnimation: .Right)
+            fartTable.scrollToRowAtIndexPath(fartIndexPath, atScrollPosition: .Top, animated: true)
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {}
@@ -377,7 +389,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func reloadFarts() {
         
-        fartTable.reloadData()
         UIView.animateWithDuration(0.35) { [unowned self] in
             
             playSaveStackView.hidden = true
