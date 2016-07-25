@@ -368,7 +368,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let viewsDictionary = ["v0": fartTable]
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-        fartTable.reloadData()
     }
     
     func dismissMenu() {
